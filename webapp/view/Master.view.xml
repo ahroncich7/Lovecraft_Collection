@@ -22,8 +22,8 @@
 			path: 'Authors>/authors'
 		}" >
 		<StandardListItem
-			title="{Authors>/Name} {Authors>/Lastname}"
-			description="{Authors>/Nationality}"
+			title="{Authors>Name} {Authors>Lastname}"
+			description="{Authors>Nationality}"
         />
 	</List>
         </content> 
