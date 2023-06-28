@@ -3,15 +3,27 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
         <content>
+		<ObjectHeader
+		title="{i18n>Master_Title}"
+		class="sapUiResponsivePadding--header" >
+		<ObjectAttribute text="{i18n>Prop 1}" />
+		<ObjectAttribute text="{i18n>Prop 2}" />
+		<ObjectAttribute text="{i18n>Prop 3}" />
+		<ObjectAttribute
+			text="{i18n>wikipedia}"
+			active="true"
+			press="handleLinkObjectAttributePress" />
+	</ObjectHeader>
+
+
 	<List
-		headerText="Authors"
+		headerText="{i18n>Authors_List_Title}"
 		items="{
-			path: '/AUTHORSet'
+			path: 'Authors>/authors'
 		}" >
 		<StandardListItem
-			title="{Name} {Lastname}"
-			description="{Nationality}"
-            tooltip="{}"
+			title="{Authors>/Name} {Authors>/Lastname}"
+			description="{Authors>/Nationality}"
         />
 	</List>
         </content> 

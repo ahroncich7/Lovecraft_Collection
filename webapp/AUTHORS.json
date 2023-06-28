@@ -1,0 +1,164 @@
+{
+    "authors": [
+      {
+        "Athrid": 0,
+        "Name": "HOWARD PHILLIPS",
+        "Lastname": "LOVECRAFT",
+        "Nationality": "USA",
+        "Birth": "20/08/1890",
+        "Death": "15/03/1937"
+      },
+      {
+        "Athrid": 1,
+        "Name": "J.R.R.",
+        "Lastname": "TOLKIEN",
+        "Nationality": "England",
+        "Birth": "03/01/1892",
+        "Death": "02/09/1973"
+      },
+      {
+        "Athrid": 2,
+        "Name": "CHARLES",
+        "Lastname": "DICKENS",
+        "Nationality": "England",
+        "Birth": "07/02/1812",
+        "Death": "09/06/1870"
+      },
+      {
+        "Athrid": 3,
+        "Name": "AGATHA",
+        "Lastname": "CHRISTIE",
+        "Nationality": "England",
+        "Birth": "15/09/1890",
+        "Death": "12/01/1976"
+      },
+      {
+        "Athrid": 4,
+        "Name": "ERNEST",
+        "Lastname": "HEMINGWAY",
+        "Nationality": "USA",
+        "Birth": "21/07/1899",
+        "Death": "02/07/1961"
+      },
+      {
+        "Athrid": 5,
+        "Name": "JANE",
+        "Lastname": "AUSTEN",
+        "Nationality": "England",
+        "Birth": "16/12/1775",
+        "Death": "18/07/1817"
+      },
+      {
+        "Athrid": 6,
+        "Name": "WILLIAM",
+        "Lastname": "SHAKESPEARE",
+        "Nationality": "England",
+        "Birth": "26/04/1564",
+        "Death": "23/04/1616"
+      },
+      {
+        "Athrid": 7,
+        "Name": "FRANZ",
+        "Lastname": "KAFKA",
+        "Nationality": "Czech Republic",
+        "Birth": "03/07/1883",
+        "Death": "03/06/1924"
+      },
+      {
+        "Athrid": 8,
+        "Name": "LEO",
+        "Lastname": "TOLSTOY",
+        "Nationality": "Russia",
+        "Birth": "09/09/1828",
+        "Death": "20/11/1910"
+      },
+      {
+        "Athrid": 9,
+        "Name": "VIRGINIA",
+        "Lastname": "WOOLF",
+        "Nationality": "England",
+        "Birth": "25/01/1882",
+        "Death": "28/03/1941"
+      },
+      {
+        "Athrid": 10,
+        "Name": "GEORGE",
+        "Lastname": "ORWELL",
+        "Nationality": "England",
+        "Birth": "25/06/1903",
+        "Death": "21/01/1950"
+      },
+      {
+        "Athrid": 11,
+        "Name": "MIGUEL",
+        "Lastname": "DE CERVANTES",
+        "Nationality": "Spain",
+        "Birth": "29/09/1547",
+        "Death": "22/04/1616"
+      },
+      {
+        "Athrid": 12,
+        "Name": "EMILY",
+        "Lastname": "BRONTE",
+        "Nationality": "England",
+        "Birth": "30/07/1818",
+        "Death": "19/12/1848"
+      },
+      {
+        "Athrid": 13,
+        "Name": "MARK",
+        "Lastname": "TWAIN",
+        "Nationality": "USA",
+        "Birth": "30/11/1835",
+        "Death": "21/04/1910"
+      },
+      {
+        "Athrid": 14,
+        "Name": "F. SCOTT",
+        "Lastname": "FITZGERALD",
+        "Nationality": "USA",
+        "Birth": "24/09/1896",
+        "Death": "21/12/1940"
+      },
+      {
+        "Athrid": 15,
+        "Name": "LEWIS",
+        "Lastname": "CARROLL",
+        "Nationality": "England",
+        "Birth": "27/01/1832",
+        "Death": "14/01/1898"
+      },
+      {
+        "Athrid": 16,
+        "Name": "JAMES",
+        "Lastname": "JOYCE",
+        "Nationality": "Ireland",
+        "Birth": "02/02/1882",
+        "Death": "13/01/1941"
+      },
+      {
+        "Athrid": 17,
+        "Name": "OSCAR",
+        "Lastname": "WILDE",
+        "Nationality": "Ireland",
+        "Birth": "16/10/1854",
+        "Death": "30/11/1900"
+      },
+      {
+        "Athrid": 18,
+        "Name": "HARPER",
+        "Lastname": "LEE",
+        "Nationality": "USA",
+        "Birth": "28/04/1926",
+        "Death": "19/02/2016"
+      },
+      {
+        "Athrid": 19,
+        "Name": "ARTHUR",
+        "Lastname": "CONAN DOYLE",
+        "Nationality": "Scotland",
+        "Birth": "22/05/1859",
+        "Death": "07/07/1930"
+      }
+    ]
+  }
