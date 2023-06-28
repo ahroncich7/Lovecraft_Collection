@@ -1,0 +1,19 @@
+<mvc:View controllerName="lvcrft.lovecraftcollection.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+	<List
+		headerText="Authors"
+		items="{
+			path: '/AUTHORSet'
+		}" >
+		<StandardListItem
+			title="{Name} {Lastname}"
+			description="{Nationality}"
+            tooltip="{}"
+        />
+	</List>
+        </content> 
+    </Page>
+</mvc:View>
