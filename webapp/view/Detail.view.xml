@@ -1,0 +1,12 @@
+<mvc:View
+	controllerName="lvcrft.lovecraftcollection.controller.Detail"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+>
+
+<Text text="{Authors>Name} -- -" />
+<Button press="onPress"></Button>
+	
+</mvc:View>

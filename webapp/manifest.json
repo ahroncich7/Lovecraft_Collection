@@ -74,7 +74,7 @@
         "preload": true,
         "settings": {}
       },
-      "Authors":{
+      "Authors": {
         "type": "sap.ui.model.json.JSONModel",
         "settings": {},
         "uri": "AUTHORS.json",
@@ -101,9 +101,16 @@
       "routes": [
         {
           "name": "RouteMaster",
-          "pattern": ":?query:",
+          "pattern": "",
           "target": [
             "TargetMaster"
+          ]
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{authorID}",
+          "target": [
+            "TargetDetail"
           ]
         }
       ],
@@ -114,6 +121,13 @@
           "clearControlAggregation": false,
           "viewId": "Master",
           "viewName": "Master"
+        },
+        "TargetDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "Detail",
+          "viewId": "detail"
         }
       }
     },
