@@ -1,6 +1,7 @@
 <mvc:View
 	controllerName="lvcrft.lovecraftcollection.controller.Master"
 	xmlns="sap.m"
+	xmlns:core="sap.core"
 	xmlns:semantic="sap.f.semantic"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
@@ -55,11 +56,11 @@
 				items="{path: 'Authors>/authors'}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
-				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+				mode="SingleSelectLeft"
 				growing="true"
 				growingScrollToLoad="true"
 				updateFinished=".onUpdateFinished"
-				selectionChange=".onSelectionChange">
+				selectionChange="onSelectionChange">
 				<infoToolbar>
 					<Toolbar
 						active="true"
@@ -94,53 +95,32 @@
 							icon="sap-icon://add"
 							type="Transparent"/>
 						<Button
-							id="groupButton"
-							press=".onOpenViewSettings"
-							icon="sap-icon://group-2"
+							id="updateButton"
+							press=".onChange"
+							tooltip="{i18n>updateAuthorBtn}"
+							icon="sap-icon://edit"
 							type="Transparent"/>
+						<Button
+							id="deleteButton"
+							press=".onDelete"
+							tooltip="{i18n>deleteAuthorBtn}"
+							icon="sap-icon://delete"
+							type="Transparent"/>
+						
 					</OverflowToolbar>
 				</headerToolbar>
-				<items>
-					<ObjectListItem
-						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
-						press="onAuthorPress"
-						title="{Authors>Name} {Authors>Lastname}"
-						number="{
-							path: 'OrderDate',
-							type: 'sap.ui.model.type.Date',
-							formatOptions: { style: 'short' }
-						}">
-						<!-- <firstStatus>
-							<ObjectStatus
-								state="{
-									parts: [
-										{path: 'RequiredDate'},
-										{path: 'ShippedDate'},
-										{path: 'OrderID'}
-									],
-									formatter:'.formatter.deliveryState'
-								}"
-								text="{
-									parts: [
-										{path: 'RequiredDate'},
-										{path: 'ShippedDate'},
-										{path: 'OrderID'}
-									],
-									formatter:'.formatter.deliveryText'
-								}"/>
 
-						</firstStatus> -->
-						<attributes>
-							<ObjectAttribute id="companyName" text="{Customer/CompanyName}" />
-							<ObjectAttribute title="{i18n>commonItemShipped}"
-								text="{= ${ShippedDate}
-									? ${ path: 'ShippedDate',
-										 type: 'sap.ui.model.type.Date',
-										 formatOptions: { style: 'medium' } }
-									: ${i18n>commonItemNotYetShipped} }" />
-						</attributes>
-					</ObjectListItem>
-				</items>
+				<CustomListItem
+				press="onAuthorPress"
+				type="Navigation"
+				>
+					<HBox>
+						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+							<Text text="{Authors>Name}"/>
+							<Label text="{Authors>Lastname}"/>
+						</VBox>
+					</HBox>
+		</CustomListItem>
 			</List>
 		</semantic:content>
 	

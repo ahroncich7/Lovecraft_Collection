@@ -21,8 +21,9 @@ sap.ui.define([
 
             },
 
-            handleLinkObjectAttributePress: function (oEvent) {
-                URLHelper.redirect("https://es.wikipedia.org/wiki/Mitos_de_Cthulhu", true);
+            onSelectionChange: function(oEvent){
+                let name = oEvent.getParameter("listItem").getBindingContext("Authors").getObject().Name
+                alert(name)
             }
         });
     });
