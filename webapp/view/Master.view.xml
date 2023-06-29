@@ -1,31 +1,151 @@
-<mvc:View controllerName="lvcrft.lovecraftcollection.controller.Master"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content>
-		<ObjectHeader
-		title="{i18n>Master_Title}"
-		class="sapUiResponsivePadding--header" >
-		<ObjectAttribute text="{i18n>Prop 1}" />
-		<ObjectAttribute text="{i18n>Prop 2}" />
-		<ObjectAttribute text="{i18n>Prop 3}" />
-		<ObjectAttribute
-			text="{i18n>wikipedia}"
-			active="true"
-			press="handleLinkObjectAttributePress" />
-	</ObjectHeader>
+<mvc:View
+	controllerName="lvcrft.lovecraftcollection.controller.Master"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+>
+	<semantic:SemanticPage id="page">
+		<semantic:titleHeading>
+			<Title text="{i18n>title}"/>
+		</semantic:titleHeading>
+
+		<!-- HEADER BUTTONS  -->
+
+		<semantic:sendMessageAction>
+			<semantic:SendMessageAction enabled="false"/>
+		</semantic:sendMessageAction>
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction visible="false"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction visible="false"/>
+		</semantic:exitFullScreenAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction visible="false" />	
+		</semantic:shareInJamAction>
+		<semantic:discussInJamAction>
+			<semantic:DiscussInJamAction visible="false" />	
+		</semantic:discussInJamAction>
 
 
-	<List
-		headerText="{i18n>Authors_List_Title}"
-		items="{
-			path: 'Authors>/authors'
-		}" >
-		<StandardListItem
-			title="{Authors>Name} {Authors>Lastname}"
-			description="{Authors>Nationality}"
-        />
-	</List>
-        </content> 
-    </Page>
+		<!-- HEADER CONTENT -->
+
+
+		<semantic:headerContent>
+			<l:HorizontalLayout>
+				<l:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute
+						class="w50"
+						text="{i18n>title-description}"
+					/>
+				</l:VerticalLayout>
+			</l:HorizontalLayout>
+		</semantic:headerContent>
+
+
+		<!-- MAIN CONTENT -->
+
+	<semantic:content>
+			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
+			<List
+				id="list"
+				width="auto"
+				class="sapFDynamicPageAlignContent"
+				items="{path: 'Authors>/authors'}"
+				busyIndicatorDelay="{masterView>/delay}"
+				noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished"
+				selectionChange=".onSelectionChange">
+				<infoToolbar>
+					<Toolbar
+						active="true"
+						id="filterBar"
+						press=".onOpenViewSettings">
+						<Title
+							id="filterBarLabel"
+							text="{masterView>/filterBarLabel}" />
+					</Toolbar>
+				</infoToolbar>
+				<headerToolbar>
+					<OverflowToolbar>
+						<SearchField
+							id="searchField"
+							showRefreshButton="true"
+							tooltip="{i18n>masterSearchTooltip}"
+							width="100%"
+							search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									minWidth="150px"
+									maxWidth="240px"
+									shrinkable="true"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<ToolbarSpacer/>
+						<Button
+							id="addButton"
+							press=".onAdd"
+							tooltip="{i18n>addAuthorBtn}"
+							icon="sap-icon://add"
+							type="Transparent"/>
+						<Button
+							id="groupButton"
+							press=".onOpenViewSettings"
+							icon="sap-icon://group-2"
+							type="Transparent"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<items>
+					<ObjectListItem
+						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
+						press="onAuthorPress"
+						title="{Authors>Name} {Authors>Lastname}"
+						number="{
+							path: 'OrderDate',
+							type: 'sap.ui.model.type.Date',
+							formatOptions: { style: 'short' }
+						}">
+						<!-- <firstStatus>
+							<ObjectStatus
+								state="{
+									parts: [
+										{path: 'RequiredDate'},
+										{path: 'ShippedDate'},
+										{path: 'OrderID'}
+									],
+									formatter:'.formatter.deliveryState'
+								}"
+								text="{
+									parts: [
+										{path: 'RequiredDate'},
+										{path: 'ShippedDate'},
+										{path: 'OrderID'}
+									],
+									formatter:'.formatter.deliveryText'
+								}"/>
+
+						</firstStatus> -->
+						<attributes>
+							<ObjectAttribute id="companyName" text="{Customer/CompanyName}" />
+							<ObjectAttribute title="{i18n>commonItemShipped}"
+								text="{= ${ShippedDate}
+									? ${ path: 'ShippedDate',
+										 type: 'sap.ui.model.type.Date',
+										 formatOptions: { style: 'medium' } }
+									: ${i18n>commonItemNotYetShipped} }" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+	
+
+		
+
+	</semantic:SemanticPage>
 </mvc:View>

@@ -14,7 +14,14 @@ sap.ui.define([
 
             },
 
-            handleLinkObjectAttributePress : function (oEvent) {
+            onAuthorPress: function (oEvent) {
+                alert("AHHH")
+                let id = oEvent.getSource().getBindingContext("Authors").getProperty("Athrid")
+                alert(id)
+
+            },
+
+            handleLinkObjectAttributePress: function (oEvent) {
                 URLHelper.redirect("https://es.wikipedia.org/wiki/Mitos_de_Cthulhu", true);
             }
         });

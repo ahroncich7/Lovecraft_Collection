@@ -1,1 +1,9 @@
 /* Enter your custom styles here */
+
+.w50 {
+    width: 50%!important;
+}
+
+.customHidden {
+    display: none!important;
+}
