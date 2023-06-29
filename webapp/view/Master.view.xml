@@ -11,25 +11,6 @@
 			<Title text="{i18n>title}"/>
 		</semantic:titleHeading>
 
-		<!-- HEADER BUTTONS  -->
-
-		<semantic:sendMessageAction>
-			<semantic:SendMessageAction enabled="false"/>
-		</semantic:sendMessageAction>
-		<semantic:fullScreenAction>
-			<semantic:FullScreenAction visible="false"/>
-		</semantic:fullScreenAction>
-		<semantic:exitFullScreenAction>
-			<semantic:ExitFullScreenAction visible="false"/>
-		</semantic:exitFullScreenAction>
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction visible="false" />	
-		</semantic:shareInJamAction>
-		<semantic:discussInJamAction>
-			<semantic:DiscussInJamAction visible="false" />	
-		</semantic:discussInJamAction>
-
-
 		<!-- HEADER CONTENT -->
 
 

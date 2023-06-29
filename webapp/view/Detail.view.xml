@@ -1,12 +1,110 @@
 <mvc:View
 	controllerName="lvcrft.lovecraftcollection.controller.Detail"
 	xmlns="sap.m"
-	xmlns:semantic="sap.f.semantic"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout"
 >
 
-<Text text="{Authors>Name} -- -" />
-<Button press="onPress"></Button>
-	
+	<!-- AUTHOR FORM -->
+
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay354"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="{Authors>Name} {Authors>Lastname}"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="Nationality" />
+				<Text id="nameText" text="{Authors>Nationality}" />
+				<Label text="Birth Date" />
+				<Text text="{Authors>Birth}" />
+				<Label text="Death Date" />
+				<Text text="{Authors>Death}" />
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+
+
+	<!-- BOOKS LIST -->
+
+	<Table
+	id="lineItemsList"
+	class="sapUiSmallMarginTop"
+	width="auto"
+	items="{Order_Details}"
+	updateFinished=".onListUpdateFinished"
+	noDataText="{i18n>detailLineItemTableNoDataText}"
+	busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+		<headerToolbar>
+			<Toolbar id="lineItemsToolbar">
+				<Title
+				id="lineItemsHeader"
+				text="BOOKS"/>
+				</Toolbar>
+				</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="{i18n>detailLineItemTableIDColumn}"/>
+						</Column>
+						<Column
+							minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+							<Text text="{i18n>detailLineItemTableUnitPriceColumn}"/>
+						</Column>
+						<Column
+							minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+							<Text text="{i18n>detailLineItemTableUnitQuantityColumn}"/>
+						</Column>
+						<Column
+							minScreenWidth="Tablet"
+							demandPopin="true"
+							hAlign="End">
+							<Text text="{i18n>detailLineItemTableTotalColumn}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<ObjectIdentifier
+									title="{Product/ProductName}"
+									text="{ProductID}"/>
+								<ObjectNumber
+									number="{
+										path: 'UnitPrice',
+										formatter: '.formatter.currencyValue'
+									}"
+									unit="{detailView>/currency}"/>
+								<ObjectAttribute
+									text="{Quantity}"/>
+								<ObjectNumber
+									number="{
+										parts:[
+											{path:'Quantity'},
+											{path:'UnitPrice'},
+											{path:'detailView>/currency'}
+										],
+										formatter: '.formatter.calculateItemTotal'
+									}"
+									unit="{detailView>/currency}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+
+
 </mvc:View>
