@@ -34,7 +34,7 @@
 				id="list"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
-				items="{path: 'Authors>/authors'}"
+				items="{path: '/AUTHORSet'}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="SingleSelectLeft"
@@ -68,22 +68,25 @@
 									priority="NeverOverflow"/>
 							</layoutData>
 						</SearchField>
+
+						<!-- BUTTONS -->
+
 						<ToolbarSpacer/>
 						<Button
 							id="addButton"
-							press=".onAdd"
+							press="onAdd"
 							tooltip="{i18n>addAuthorBtn}"
 							icon="sap-icon://add"
 							type="Transparent"/>
 						<Button
 							id="updateButton"
-							press=".onChange"
+							press="onChange"
 							tooltip="{i18n>updateAuthorBtn}"
 							icon="sap-icon://edit"
 							type="Transparent"/>
 						<Button
 							id="deleteButton"
-							press=".onDelete"
+							press="onDelete"
 							tooltip="{i18n>deleteAuthorBtn}"
 							icon="sap-icon://delete"
 							type="Transparent"/>
@@ -97,8 +100,8 @@
 				>
 					<HBox>
 						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-							<Text text="{Authors>Name}"/>
-							<Label text="{Authors>Lastname}"/>
+							<Text text="{Name}"/>
+							<Label text="{Lastname}"/>
 						</VBox>
 					</HBox>
 		</CustomListItem>

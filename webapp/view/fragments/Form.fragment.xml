@@ -1,0 +1,49 @@
+<core:FragmentDefinition 
+xmlns="sap.m" 
+xmlns:f="sap.ui.layout.form" 
+xmlns:core="sap.ui.core"
+
+>
+    <Dialog id="openDialog" title="Hello">
+
+        <VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormDisplay354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="New Author"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="AuthorId" />
+                <Input id="idInput" type="Number"></Input>
+				<Label text="Name" />
+                <Input id="nameInput" type="Text"></Input>
+				<Label text="Last Name" />
+                <Input id="lastNameInput" type="Text"></Input>
+				<Label text="Nationality" />
+                <Input id="nationalityInput" type="Text"></Input>
+				<Label text="Birth Date" />
+                <Input id="birthDateInput" type="Date"></Input>
+				<Label text="Death Date" />
+                <Input id="deathDateInput" type="Date"></Input>
+
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+
+        <beginButton>
+            <Button text="Ok" press=".closeDialog"/>
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>
