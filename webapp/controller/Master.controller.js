@@ -141,10 +141,10 @@ sap.ui.define([
                 var sPath = "/AUTHORSet(" + id + ")";
                 OData.update(sPath, oAuthor, {
                     success: function (data, response) {
-                        debugger
+                        
                     },
                     error: function (error) {
-                        debugger
+                        console.error(error);
                     }
                 });
 
