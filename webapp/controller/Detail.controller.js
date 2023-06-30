@@ -1,10 +1,12 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (Controller,
+        JSONModel) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Detail", {
@@ -12,6 +14,7 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
                 oRouter.getRoute("detail").attachMatched(this._onRouteMatched, this);
+
             },
 
             _onRouteMatched: function (oEvent) {
@@ -24,7 +27,7 @@ sap.ui.define([
 
                 oView.bindElement({
 
-                    path: "Authors>/authors/" + oArgs.authorID+"",
+                    path: "/AUTHORSet(" + oArgs.authorID + ")",
 
                     events: {
 
@@ -44,9 +47,28 @@ sap.ui.define([
 
                 });
 
+                // DEFINE MODEL PARA EL CASO DE LOS LIBROS
+
+                var that = this;
+                var sPathBooks = "/AUTHORSet(" + oArgs.authorID + ")/toBooks";
+                var oDataModel = this.getView().getModel();
+                oDataModel.read(sPathBooks, {
+
+                    success: function (response) {
+
+
+                        that.getView().setModel(new JSONModel(response.results), "BOOKS")
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+
+                })
+
+
             },
 
-            onPress: function(oEvent){
+            onPress: function (oEvent) {
                 let view = this.getView()
             }
 

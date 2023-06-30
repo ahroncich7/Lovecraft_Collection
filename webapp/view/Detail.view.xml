@@ -11,7 +11,7 @@
 		<f:SimpleForm id="SimpleFormDisplay354"
 			editable="false"
 			layout="ResponsiveGridLayout"
-			title="{Authors>Name} {Authors>Lastname}"
+			title="{Name} {Lastname}"
 			labelSpanXL="3"
 			labelSpanL="3"
 			labelSpanM="3"
@@ -27,11 +27,11 @@
 			singleContainerFullSize="false" >
 			<f:content>
 				<Label text="Nationality" />
-				<Text id="nameText" text="{Authors>Nationality}" />
+				<Text id="nameText" text="{Nationality}" />
 				<Label text="Birth Date" />
-				<Text text="{Authors>Birth}" />
+				<Text text="{Birth}" />
 				<Label text="Death Date" />
-				<Text text="{Authors>Death}" />
+				<Text text="{Death}" />
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
@@ -40,14 +40,14 @@
 	<!-- BOOKS LIST -->
 
 	<Table
-	id="lineItemsList"
+	id="tableID"
 	class="sapUiSmallMarginTop"
 	width="auto"
-	items="{Order_Details}"
+	items="{BOOKS>/}"
 	updateFinished=".onListUpdateFinished"
 	noDataText="{i18n>detailLineItemTableNoDataText}"
 	busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-		<headerToolbar>
+		<headerToolbar id="tableContentID">
 			<Toolbar id="lineItemsToolbar">
 				<Title
 				id="lineItemsHeader"
@@ -56,51 +56,42 @@
 				</headerToolbar>
 					<columns>
 						<Column>
-							<Text text="{i18n>detailLineItemTableIDColumn}"/>
+							<Text text="{i18n>book_title}"/>
 						</Column>
 						<Column
 							minScreenWidth="Tablet"
 							demandPopin="true"
 							hAlign="End">
-							<Text text="{i18n>detailLineItemTableUnitPriceColumn}"/>
+							<Text text="{i18n>book_published_year}"/>
 						</Column>
 						<Column
 							minScreenWidth="Tablet"
 							demandPopin="true"
 							hAlign="End">
-							<Text text="{i18n>detailLineItemTableUnitQuantityColumn}"/>
+							<Text text="{i18n>book_publisher}"/>
 						</Column>
 						<Column
 							minScreenWidth="Tablet"
 							demandPopin="true"
 							hAlign="End">
-							<Text text="{i18n>detailLineItemTableTotalColumn}"/>
+							<Text text="{i18n>book_review}"/>
 						</Column>
 					</columns>
 					<items>
 						<ColumnListItem>
 							<cells>
 								<ObjectIdentifier
-									title="{Product/ProductName}"
-									text="{ProductID}"/>
-								<ObjectNumber
-									number="{
-										path: 'UnitPrice',
-										formatter: '.formatter.currencyValue'
-									}"
-									unit="{detailView>/currency}"/>
+									title="{BOOKS>Title}"
+									/>
 								<ObjectAttribute
-									text="{Quantity}"/>
-								<ObjectNumber
-									number="{
-										parts:[
-											{path:'Quantity'},
-											{path:'UnitPrice'},
-											{path:'detailView>/currency'}
-										],
-										formatter: '.formatter.calculateItemTotal'
-									}"
-									unit="{detailView>/currency}"/>
+									text="{BOOKS>PubYear}"/>
+								<ObjectAttribute
+									text="{BOOKS>Publisher}"/>
+								<ObjectAttribute
+									text="{i18n>book_review_title}"
+									press="reviewPress"
+									/>
+
 							</cells>
 						</ColumnListItem>
 					</items>
