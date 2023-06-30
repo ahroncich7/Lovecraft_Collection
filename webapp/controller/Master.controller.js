@@ -74,7 +74,7 @@ sap.ui.define([
                 } else {
                     this._createAuthor();
                 }
-                this.byId("openDialog").close()
+                this.byId("openDialog").destroy()
             },
 
 
@@ -100,7 +100,7 @@ sap.ui.define([
                 var OData = this.getView().getModel()
                 OData.create(sPath, oAuthor, {
                     success: function (response) {
-                        debugger
+                        
                     },
                     error: function (error) {
                         console.error(error)
@@ -147,6 +147,7 @@ sap.ui.define([
                         console.error(error);
                     }
                 });
+                
 
             },
 
