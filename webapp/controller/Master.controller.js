@@ -103,7 +103,7 @@ sap.ui.define([
                         debugger
                     },
                     error: function (error) {
-                        debugger
+                        console.error(error)
                     }
                 });
             },
@@ -138,7 +138,7 @@ sap.ui.define([
 
                 var id = this.selectedAuthor.Athrid
 
-                var sPath = "/AUTHORSet("+id+")";
+                var sPath = "/AUTHORSet(" + id + ")";
                 OData.update(sPath, oAuthor, {
                     success: function (data, response) {
                         debugger
@@ -150,9 +150,27 @@ sap.ui.define([
 
             },
 
-            _deleteAuthor: function () {
+
+            onDelete: function (oEvent) {
+                if (this.selectedAuthor) {
+                    this._deleteAuthor(this.selectedAuthor.Athrid)
+                }
+            },
+
+            _deleteAuthor: function (authorID) {
+
+                var sPath = "/AUTHORSet(" + authorID + ")"
+                var oDataModel = this.getView().getModel()
+
+                oDataModel.remove(sPath, {
+                    success: function(data, response){
+
+                    },
+                    error: function(error){
+                        console.error(error)
+                    }
+                })
 
             }
-
-        });
-    });
+        })
+    })
