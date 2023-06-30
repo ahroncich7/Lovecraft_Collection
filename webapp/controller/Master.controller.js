@@ -109,10 +109,10 @@ sap.ui.define([
             },
 
             onChange: function () {
-                this._onOpenDialog();
 
-
-
+                if (this.selectedAuthor) {
+                    this._onOpenDialog();
+                }
             },
 
             _updateAuthor: function (oEvent) {
@@ -163,10 +163,10 @@ sap.ui.define([
                 var oDataModel = this.getView().getModel()
 
                 oDataModel.remove(sPath, {
-                    success: function(data, response){
+                    success: function (data, response) {
 
                     },
-                    error: function(error){
+                    error: function (error) {
                         console.error(error)
                     }
                 })
