@@ -42,16 +42,7 @@
 				growingScrollToLoad="true"
 				updateFinished=".onUpdateFinished"
 				selectionChange="onSelectionChange">
-				<infoToolbar>
-					<Toolbar
-						active="true"
-						id="filterBar"
-						press=".onOpenViewSettings">
-						<Title
-							id="filterBarLabel"
-							text="{masterView>/filterBarLabel}" />
-					</Toolbar>
-				</infoToolbar>
+
 				<headerToolbar>
 					<OverflowToolbar>
 						<SearchField
