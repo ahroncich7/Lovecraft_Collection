@@ -24,6 +24,11 @@ sap.ui.define([
 
 
             onBeforeRendering: function () {
+                this._setLocalModel()
+
+            },
+
+            _setLocalModel: function () {
                 var thatView = this.getView();
                 var oModel = this.getView().getModel();
                 oModel.read("/AUTHORSet", {
@@ -36,7 +41,6 @@ sap.ui.define([
                         console.error(error);
                     }
                 })
-
             },
 
             handleSearch: function (evt) {
@@ -109,7 +113,10 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
+                                    that.selectedAuthor=undefined;
+                                    that.byId("list").removeSelections()
                                 })
+
                                 that.byId("closeBtn").attachPress(that._createAuthor, that);
                             }
                         )
@@ -118,12 +125,15 @@ sap.ui.define([
                     this.byId("closeBtn").attachPress(this._createAuthor, this);
                     oDialog.attachAfterClose(function () {
                         oDialog.destroy();
+                        
                     })
 
 
                 }
 
             },
+
+
 
             _onOpenDialogUpdate: function () {
                 var oView = this.getView();
@@ -141,6 +151,8 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
+                                    that.selectedAuthor=undefined;
+                                    that.byId("list").removeSelections()
                                 })
 
                                 // CARGA DATOS EN EL DIALOG
@@ -179,6 +191,7 @@ sap.ui.define([
             _closeDialog: function () {
 
                 var dialog = this.byId("openDialog");
+                this.selectedAuthor = undefined
                 dialog.destroy();
             },
 
@@ -212,6 +225,7 @@ sap.ui.define([
                     }
                 });
                 this._closeDialog();
+                this._setLocalModel()
             },
 
             onChange: function () {
@@ -255,6 +269,8 @@ sap.ui.define([
                 });
 
                 this._closeDialog();
+                this._setLocalModel()
+
 
 
             },
@@ -279,6 +295,7 @@ sap.ui.define([
                         console.error(error)
                     }
                 })
+                this._setLocalModel()
 
             }
         })

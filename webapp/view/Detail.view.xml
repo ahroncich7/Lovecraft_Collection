@@ -4,98 +4,120 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
 >
-
 	<!-- AUTHOR FORM -->
-
-	<VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="SimpleFormDisplay354"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title="{Name} {Lastname}"
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-				<Label text="Nationality" />
-				<Text id="nameText" text="{Nationality}" />
-				<Label text="Birth Date" />
-				<Text text="{Birth}" />
-				<Label text="Death Date" />
-				<Text text="{Death}" />
-			</f:content>
-		</f:SimpleForm>
-	</VBox>
-
-
+	<FlexBox
+		justifyContent="Center"
+		alignItems="Center"
+		direction="Row"
+		width="100%"
+	>
+		<FlexBox
+			justifyContent="Center"
+			alignItems="Center"
+			direction="Column"
+			width="50%"
+		>
+			<f:SimpleForm
+				id="SimpleFormDisplay354"
+				editable="false"
+				layout="ResponsiveGridLayout"
+				title="{Name} {Lastname}"
+				labelSpanXL="3"
+				labelSpanL="3"
+				labelSpanM="3"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="4"
+				emptySpanL="4"
+				emptySpanM="4"
+				emptySpanS="0"
+				columnsXL="1"
+				columnsL="1"
+				columnsM="1"
+				singleContainerFullSize="false"
+			>
+				<f:content>
+					<Label text="Nationality"/>
+					<Text
+						id="nameText"
+						text="{Nationality}"
+					/>
+					<Label text="Birth Date"/>
+					<Text text="{Birth}"/>
+					<Label text="Death Date"/>
+					<Text text="{Death}"/>
+				</f:content>
+			</f:SimpleForm>
+		</FlexBox>
+		<FlexBox
+			justifyContent="Center"
+			alignItems="Center"
+			direction="Column"
+			width="50%"
+		>
+			<Image
+				src="https://upload.wikimedia.org/wikipedia/commons/9/99/H._P._Lovecraft_Portrait%2C_June_1934.png"
+				width="200px"
+				height="200px"
+			/>
+		</FlexBox>
+	</FlexBox>
 	<!-- BOOKS LIST -->
-
 	<Table
-	id="tableID"
-	class="sapUiSmallMarginTop"
-	width="auto"
-	items="{BOOKS>/}"
-	updateFinished=".onListUpdateFinished"
-	noDataText="{i18n>detailLineItemTableNoDataText}"
-	busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+		id="tableID"
+		class="sapUiSmallMarginTop"
+		width="auto"
+		items="{BOOKS>/}"
+		updateFinished=".onListUpdateFinished"
+		noDataText="{i18n>detailLineItemTableNoDataText}"
+		busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+	>
 		<headerToolbar id="tableContentID">
 			<Toolbar id="lineItemsToolbar">
 				<Title
-				id="lineItemsHeader"
-				text="BOOKS"/>
-				</Toolbar>
-				</headerToolbar>
-					<columns>
-						<Column>
-							<Text text="{i18n>book_title}"/>
-						</Column>
-						<Column
-							minScreenWidth="Tablet"
-							demandPopin="true"
-							hAlign="End">
-							<Text text="{i18n>book_published_year}"/>
-						</Column>
-						<Column
-							minScreenWidth="Tablet"
-							demandPopin="true"
-							hAlign="End">
-							<Text text="{i18n>book_publisher}"/>
-						</Column>
-						<Column
-							minScreenWidth="Tablet"
-							demandPopin="true"
-							hAlign="End">
-							<Text text="{i18n>book_review}"/>
-						</Column>
-					</columns>
-					<items>
-						<ColumnListItem>
-							<cells>
-								<ObjectIdentifier
-									title="{BOOKS>Title}"
-									/>
-								<ObjectAttribute
-									text="{BOOKS>PubYear}"/>
-								<ObjectAttribute
-									text="{BOOKS>Publisher}"/>
-								<ObjectAttribute
-									text="{i18n>book_review_title}"
-									press="reviewPress"
-									/>
-
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-
-
+					id="lineItemsHeader"
+					text="BOOKS"
+				/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>book_title}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End"
+			>
+				<Text text="{i18n>book_published_year}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End"
+			>
+				<Text text="{i18n>book_publisher}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true"
+				hAlign="End"
+			>
+				<Text text="{i18n>book_review}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier title="{BOOKS>Title}"/>
+					<ObjectAttribute text="{BOOKS>PubYear}"/>
+					<ObjectAttribute text="{BOOKS>Publisher}"/>
+					<ObjectAttribute
+						text="{i18n>book_review_title}"
+						press="reviewPress"
+					/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
 </mvc:View>
