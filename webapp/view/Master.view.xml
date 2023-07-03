@@ -51,7 +51,7 @@
 							showRefreshButton="true"
 							tooltip="{i18n>masterSearchTooltip}"
 							width="100%"
-							search=".onSearch">
+							liveChange="handleSearch">
 							<layoutData>
 								<OverflowToolbarLayoutData
 									minWidth="150px"

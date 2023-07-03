@@ -1,14 +1,18 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-	"sap/ui/model/json/JSONModel",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-	Fragment,
-	JSONModel) {
+        Fragment,
+        JSONModel,
+        Filter, FilterOperator) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
@@ -25,14 +29,45 @@ sap.ui.define([
                 oModel.read("/AUTHORSet", {
                     success: function (response) {
 
-                        thatView.setModel(new JSONModel( response.results),"AUTHORS")
-  
+                        thatView.setModel(new JSONModel(response.results), "AUTHORS")
+
                     },
                     error: function (error) {
-                      console.error(error);
+                        console.error(error);
                     }
                 })
 
+            },
+
+            handleSearch: function (evt) {
+                var filters = [];
+                var combinedFilter = []
+                var query = evt.getParameter("newValue");
+                if (query && query.length > 0) {
+                    filters.push(new Filter({
+                        path: "Name",
+                        operator: FilterOperator.Contains,
+                        value1: query
+                    })
+                    )
+
+                    filters.push(new Filter({
+                        path: "Lastname",
+                        operator: FilterOperator.Contains,
+                        value1: query
+                    })
+                    )
+                    
+                    combinedFilter = new Filter({
+                        filters: filters,
+                        and: false
+                    });
+                }
+
+
+                var list = this.getView().byId("list");
+                var binding = list.getBinding("items");
+                binding.filter(combinedFilter);
             },
 
             onSelectionChange: function (oEvent) {
