@@ -73,12 +73,6 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {}
-      },
-      "Authors": {
-        "type": "sap.ui.model.json.JSONModel",
-        "settings": {},
-        "uri": "AUTHORS.json",
-        "preload": false
       }
     },
     "resources": {

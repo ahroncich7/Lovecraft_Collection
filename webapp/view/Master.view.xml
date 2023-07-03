@@ -9,6 +9,7 @@
 	<semantic:SemanticPage id="page">
 		<semantic:titleHeading>
 			<Title text="{i18n>title}"/>
+
 		</semantic:titleHeading>
 
 		<!-- HEADER CONTENT -->
@@ -34,7 +35,7 @@
 				id="list"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
-				items="{path: '/AUTHORSet'}"
+				items="{AUTHORS>/}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="SingleSelectLeft"
@@ -91,8 +92,8 @@
 				>
 					<HBox>
 						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
-							<Text text="{Name}"/>
-							<Label text="{Lastname}"/>
+							<Text text="{AUTHORS>Name}"/>
+							<Label text="{AUTHORS>Lastname}"/>
 						</VBox>
 					</HBox>
 		</CustomListItem>

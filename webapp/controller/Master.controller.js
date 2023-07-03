@@ -1,15 +1,37 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
+	"sap/ui/model/json/JSONModel",
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, Fragment) {
+    function (Controller,
+	Fragment,
+	JSONModel) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
             onInit: function () {
+
+
+
+            },
+
+
+            onBeforeRendering: function () {
+                var thatView = this.getView();
+                var oModel = this.getView().getModel();
+                oModel.read("/AUTHORSet", {
+                    success: function (response) {
+
+                        thatView.setModel(new JSONModel( response.results),"AUTHORS")
+  
+                    },
+                    error: function (error) {
+                      console.error(error);
+                    }
+                })
 
             },
 
@@ -21,7 +43,7 @@ sap.ui.define([
 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-                var clickedAuthorId = oEvent.getSource().getBindingContext().getProperty("Athrid");
+                var clickedAuthorId = oEvent.getSource().getBindingContext("AUTHORS").getProperty("Athrid");
 
                 oRouter.navTo("detail", {
 
