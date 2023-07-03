@@ -25,8 +25,7 @@ xmlns:core="sap.ui.core"
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
-				<Label text="AuthorId" />
-                <Input id="idInput" type="Number"></Input>
+
 				<Label text="Name" />
                 <Input id="nameInput" type="Text"></Input>
 				<Label text="Last Name" />

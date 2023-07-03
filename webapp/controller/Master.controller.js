@@ -113,24 +113,14 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
-                                    that.selectedAuthor=undefined;
+                                    that.selectedAuthor = undefined;
                                     that.byId("list").removeSelections()
                                 })
 
                                 that.byId("closeBtn").attachPress(that._createAuthor, that);
                             }
                         )
-                } else {
-                    this.byId("openDialog").open();
-                    this.byId("closeBtn").attachPress(this._createAuthor, this);
-                    oDialog.attachAfterClose(function () {
-                        oDialog.destroy();
-                        
-                    })
-
-
                 }
-
             },
 
 
@@ -151,13 +141,13 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
-                                    that.selectedAuthor=undefined;
+                                    that.selectedAuthor = undefined;
                                     that.byId("list").removeSelections()
                                 })
 
                                 // CARGA DATOS EN EL DIALOG
 
-                                that.byId("idInput").setValue(that.selectedAuthor.Athrid);
+                                // that.byId("idInput").setValue(that.selectedAuthor.Athrid);
                                 that.byId("nameInput").setValue(that.selectedAuthor.Name);
                                 that.byId("lastNameInput").setValue(that.selectedAuthor.Lastname);
                                 that.byId("nationalityInput").setValue(that.selectedAuthor.Nationality);
@@ -167,23 +157,6 @@ sap.ui.define([
                                 that.byId("closeBtn").attachPress(that._updateAuthor, that);
                             }
                         )
-                } else {
-
-                    this.byId("openDialog")
-                    // this.byId("openDialog").open();
-
-                    // // CARGA DATOS EN EL DIALOG
-
-                    // this.byId("idInput").setValue(this.selectedAuthor.Athrid);
-                    // this.byId("nameInput").setValue(this.selectedAuthor.Name);
-                    // this.byId("lastNameInput").setValue(this.selectedAuthor.Lastname);
-                    // this.byId("nationalityInput").setValue(this.selectedAuthor.Nationality);
-                    // this.byId("birthDateInput").setValue(this.selectedAuthor.Birth);
-                    // this.byId("deathDateInput").setValue(this.selectedAuthor.Death);
-
-                    // this.byId("closeBtn").attachPress(this._updateAuthor, this);
-
-
                 }
 
             },
@@ -197,7 +170,7 @@ sap.ui.define([
 
 
             _createAuthor: function () {
-                var oIdInput = this.byId("idInput");
+                // var oIdInput = this.byId("idInput");
                 var oNameInput = this.byId("nameInput");
                 var oLastNameInput = this.byId("lastNameInput");
                 var oNationalityInput = this.byId("nationalityInput");
@@ -206,7 +179,7 @@ sap.ui.define([
 
                 var oAuthor = {
 
-                    "Athrid": Number(oIdInput.getValue()),
+                    // "Athrid": Number(oIdInput.getValue()),
                     "Name": oNameInput.getValue(),
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
@@ -237,7 +210,7 @@ sap.ui.define([
 
             _updateAuthor: function (oEvent) {
 
-                var oIdInput = this.byId("idInput");
+                // var oIdInput = this.byId("idInput");
                 var oNameInput = this.byId("nameInput");
                 var oLastNameInput = this.byId("lastNameInput");
                 var oNationalityInput = this.byId("nationalityInput");
@@ -246,7 +219,7 @@ sap.ui.define([
 
                 var oAuthor = {
 
-                    "Athrid": Number(oIdInput.getValue()),
+                    // "Athrid": Number(oIdInput.getValue()),
                     "Name": oNameInput.getValue(),
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
@@ -280,6 +253,8 @@ sap.ui.define([
                 if (this.selectedAuthor) {
                     this._deleteAuthor(this.selectedAuthor.Athrid)
                 }
+                this.selectedAuthor = undefined;
+                this.byId("list").removeSelections()
             },
 
             _deleteAuthor: function (authorID) {
@@ -296,6 +271,7 @@ sap.ui.define([
                     }
                 })
                 this._setLocalModel()
+
 
             }
         })
