@@ -57,7 +57,7 @@ sap.ui.define([
                         value1: query
                     })
                     )
-                    
+
                     combinedFilter = new Filter({
                         filters: filters,
                         and: false
@@ -71,7 +71,7 @@ sap.ui.define([
             },
 
             onSelectionChange: function (oEvent) {
-                this.selectedAuthor = oEvent.getParameter("listItem").getBindingContext().getObject();
+                this.selectedAuthor = oEvent.getParameter("listItem").getBindingContext("AUTHORS").getObject();
             },
 
             onAuthorPress: function (oEvent) {
