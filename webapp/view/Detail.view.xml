@@ -56,9 +56,8 @@
 			width="50%"
 		>
 			<Image
-				src="https://upload.wikimedia.org/wikipedia/commons/9/99/H._P._Lovecraft_Portrait%2C_June_1934.png"
+				src="{ImageUrl}"
 				width="200px"
-				height="200px"
 			/>
 		</FlexBox>
 	</FlexBox>

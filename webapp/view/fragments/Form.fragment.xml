@@ -36,6 +36,8 @@ xmlns:core="sap.ui.core"
                 <Input id="birthDateInput" type="Date"></Input>
 				<Label text="Death Date" />
                 <Input id="deathDateInput" type="Date"></Input>
+				<Label text="Image Url" />
+                <Input id="imageInput" type="Text"></Input>
 
 			</f:content>
 		</f:SimpleForm>

@@ -162,6 +162,7 @@ sap.ui.define([
                                 that.byId("nationalityInput").setValue(that.selectedAuthor.Nationality);
                                 that.byId("birthDateInput").setValue(that.selectedAuthor.Birth);
                                 that.byId("deathDateInput").setValue(that.selectedAuthor.Death);
+                                that.byId("imageInput").setValue(that.selectedAuthor.ImageUrl);
 
                                 that.byId("closeBtn").attachPress(that._updateAuthor, that);
                             }
@@ -185,6 +186,7 @@ sap.ui.define([
                 var oNationalityInput = this.byId("nationalityInput");
                 var oBirthDateInput = this.byId("birthDateInput");
                 var oDeathDateInput = this.byId("deathDateInput");
+                var imageInput = this.byId("imageInput");
 
                 var oAuthor = {
 
@@ -193,7 +195,9 @@ sap.ui.define([
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
                     "Birth": oBirthDateInput.getValue(),
-                    "Death": oDeathDateInput.getValue()
+                    "Death": oDeathDateInput.getValue(),
+                    "ImageUrl": imageInput.getValue(),
+                    
                 };
 
                 let sPath = "/AUTHORSet";
@@ -225,6 +229,7 @@ sap.ui.define([
                 var oNationalityInput = this.byId("nationalityInput");
                 var oBirthDateInput = this.byId("birthDateInput");
                 var oDeathDateInput = this.byId("deathDateInput");
+                var imageInput = this.byId("imageInput");
 
                 var oAuthor = {
 
@@ -233,7 +238,8 @@ sap.ui.define([
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
                     "Birth": oBirthDateInput.getValue(),
-                    "Death": oDeathDateInput.getValue()
+                    "Death": oDeathDateInput.getValue(),
+                    "ImageUrl": imageInput.getValue()
                 };
 
                 var OData = this.getView().getModel()
