@@ -35,7 +35,7 @@
 				id="list"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
-				items="{AUTHORS>/}"
+				items="{AUTHORS>/authors}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="SingleSelectLeft"
@@ -75,13 +75,17 @@
 							press="onChange"
 							tooltip="{i18n>updateAuthorBtn}"
 							icon="sap-icon://edit"
-							type="Transparent"/>
+							type="Transparent"
+							enabled="{AUTHORS>/selected}"
+							/>
 						<Button
 							id="deleteButton"
 							press="onDelete"
 							tooltip="{i18n>deleteAuthorBtn}"
 							icon="sap-icon://delete"
-							type="Transparent"/>
+							type="Transparent"
+							enabled="{AUTHORS>/selected}"
+							/>
 						
 					</OverflowToolbar>
 				</headerToolbar>

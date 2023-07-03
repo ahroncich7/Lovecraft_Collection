@@ -33,8 +33,11 @@ sap.ui.define([
                 var oModel = this.getView().getModel();
                 oModel.read("/AUTHORSet", {
                     success: function (response) {
-
-                        thatView.setModel(new JSONModel(response.results), "AUTHORS")
+                        var newModel = {
+                            "authors": response.results,
+                            "selected":false
+                        }
+                        thatView.setModel(new JSONModel(newModel), "AUTHORS")
 
                     },
                     error: function (error) {
@@ -76,6 +79,12 @@ sap.ui.define([
 
             onSelectionChange: function (oEvent) {
                 this.selectedAuthor = oEvent.getParameter("listItem").getBindingContext("AUTHORS").getObject();
+                this.getView().getModel("AUTHORS").setProperty("/selected", true);
+            },
+
+            deselect: function(){
+                this.getView().getModel("AUTHORS").setProperty("/selected", false);
+                this.selectedAuthor = undefined;
             },
 
             onAuthorPress: function (oEvent) {
@@ -113,7 +122,7 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
-                                    that.selectedAuthor = undefined;
+                                    that.deselect();
                                     that.byId("list").removeSelections()
                                 })
 
@@ -141,7 +150,7 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
-                                    that.selectedAuthor = undefined;
+                                    that.deselect();
                                     that.byId("list").removeSelections()
                                 })
 
@@ -164,7 +173,7 @@ sap.ui.define([
             _closeDialog: function () {
 
                 var dialog = this.byId("openDialog");
-                this.selectedAuthor = undefined
+                this.deselect()
                 dialog.destroy();
             },
 
@@ -253,7 +262,7 @@ sap.ui.define([
                 if (this.selectedAuthor) {
                     this._deleteAuthor(this.selectedAuthor.Athrid)
                 }
-                this.selectedAuthor = undefined;
+                this.deselect();
                 this.byId("list").removeSelections()
             },
 
