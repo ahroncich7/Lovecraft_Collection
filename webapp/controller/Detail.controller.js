@@ -1,12 +1,14 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+	"sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-        JSONModel) {
+	JSONModel,
+	Fragment) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Detail", {
@@ -49,8 +51,14 @@ sap.ui.define([
 
                 // DEFINE MODEL PARA EL CASO DE LOS LIBROS
 
+                this._setLocalModelBooks(oArgs.authorID);
+
+
+            },
+
+            _setLocalModelBooks: function (authorId) {
                 var that = this;
-                var sPathBooks = "/AUTHORSet(" + oArgs.authorID + ")/toBooks";
+                var sPathBooks = "/AUTHORSet(" + authorId + ")/toBooks";
                 var oDataModel = this.getView().getModel();
                 oDataModel.read(sPathBooks, {
 
@@ -64,12 +72,76 @@ sap.ui.define([
                     }
 
                 })
-
-
             },
 
-            onPress: function (oEvent) {
-                let view = this.getView()
+            onDelete: function (oEvent) {
+                var bookId = oEvent.getSource().getBindingContext("BOOKS").getObject().Bookid;
+                var authorId = oEvent.getSource().getBindingContext("BOOKS").getObject().Athrid;
+                var oModel = this.getView().getModel();
+                var sPath = "/BOOKSet(" + bookId + ")"
+                oModel.remove(sPath, {
+                    success: function (data, response) {
+
+                    },
+                    error: function (error) {
+                        console.error(error)
+                    }
+                })
+
+                this._setLocalModelBooks(authorId)
+            },
+
+            onAdd: function(){
+                this._onOpenDialog();
+            },
+
+            _onOpenDialog: function () {
+                var oView = this.getView();
+                var that = this;
+
+                if (!this.byId("openDialogBooks")) {
+                    Fragment.load(
+                        {
+                            id: oView.getId(),
+                            name: "lvcrft.lovecraftcollection.view.fragments.BookForm",
+                            controller: this
+                        }).then(
+                            function (oDialog) {
+                                oView.addDependent(oDialog);
+                                oDialog.open();
+                                oDialog.attachAfterClose(function () {
+                                    oDialog.destroy();
+                                })
+
+                                that.byId("closeBtn").attachPress(that._createBook, that);
+                            }
+                        )
+                }
+            },
+
+            _createBook: function(oEvent){
+                var authorId = oEvent.getSource().getBindingContext().getObject().Athrid;
+                var oModel = this.getView().getModel();
+                var sPath = "/BOOKSet";
+                var oBook = {
+                    "Athrid": authorId,
+                    "Title" : this.byId("titleInput").getValue(),
+                    "PubYear" : this.byId("pubYearInput").getValue(),
+                    "Publisher" : this.byId("pubInput").getValue(),
+                    "Review" : this.byId("reviewInput").getValue(),
+                }
+                oModel.create(sPath, oBook, {
+                    success: function (data, response) {
+
+                    },
+                    error: function (error) {
+                        console.error(error)
+                    }
+                })
+
+                this._setLocalModelBooks(authorId);
+                this.byId("openDialogBooks").close();
+
             }
 
 
