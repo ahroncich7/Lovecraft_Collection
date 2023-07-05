@@ -1,57 +1,76 @@
-<core:FragmentDefinition 
-xmlns="sap.m" 
-xmlns:f="sap.ui.layout.form" 
-xmlns:core="sap.ui.core"
-
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
 >
-    <Dialog id="openDialogBooks" title="Hello">
-		
-        <VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="form"
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title="New Author"
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-
-				<Label text="Title" />
-                <Input id="titleInput" type="Text"></Input>
-				<Label text="Publish Year" />
-				<Input id="pubYearInput" type="Number" />
-				<Label text="Publisher" />
-                <Input id="pubInput" type="Text"></Input>
-				<Label text="Review" />
-                <TextArea
-					id="reviewInput"
-					cols="20"
-					growing="false"
-					growingMaxLines="0"
-					height=""
-					maxLength="0"
-					rows="2"
-					showExceededText="false"
-					valueLiveUpdate="false"
-					wrapping="None"
-				>		
-				</TextArea>
-			</f:content>
-		</f:SimpleForm>
-	</VBox>
-
-        <beginButton>
-            <Button id="closeBtn" text="Ok"/>
-        </beginButton>
-    </Dialog>
+	<Dialog
+		id="openDialogBooks"
+		title="Hello"
+	>
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm
+				id="form"
+				editable="true"
+				layout="ResponsiveGridLayout"
+				title="New Author"
+				labelSpanXL="3"
+				labelSpanL="3"
+				labelSpanM="3"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="4"
+				emptySpanL="4"
+				emptySpanM="4"
+				emptySpanS="0"
+				columnsXL="1"
+				columnsL="1"
+				columnsM="1"
+				singleContainerFullSize="false"
+			>
+				<f:content>
+					<Label text="Title"/>
+					<Input
+						id="titleInput"
+						type="Text"
+					/>
+					<Label text="Publish Year"/>
+					<Input
+						id="pubYearInput"
+						type="Number"
+					/>
+					<Label text="Publisher"/>
+					<Input
+						id="pubInput"
+						type="Text"
+					/>
+					<Label text="Review"/>
+					<TextArea
+						id="reviewInput"
+						cols="20"
+						growing="false"
+						growingMaxLines="0"
+						height=""
+						maxLength="0"
+						rows="2"
+						showExceededText="false"
+						valueLiveUpdate="false"
+						wrapping="None"
+					/>
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+		<beginButton>
+			<Button
+				id="closeBtn"
+				text="Ok"
+			/>
+		</beginButton>
+		<endButton>
+			<Button
+				id="cancelBtn"
+				text="Cancel"
+				type="Reject"
+			/>
+		</endButton>
+	</Dialog>
 </core:FragmentDefinition>

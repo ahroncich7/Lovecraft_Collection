@@ -3,8 +3,11 @@
 	controllerName="lvcrft.lovecraftcollection.controller.Detail"
 	xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
+	xmlns:semantic="sap.f.semantic"
 	xmlns:mvc="sap.ui.core.mvc"
 >
+
+<Page >
 	<!-- AUTHOR FORM -->
 	<HBox
 		class="custom-hbox-header"
@@ -55,86 +58,88 @@
 		</VBox>
 	</HBox>
 	<!-- BOOKS LIST -->
-	<Table
-		id="tableID"
-		class="sapUiSmallMarginTop"
-		width="auto"
-		items="{BOOKS>/}"
-		updateFinished=".onListUpdateFinished"
-		noDataText="{i18n>detailLineItemTableNoDataText}"
-		busyIndicatorDelay="{detailView>/lineItemTableDelay}"
-	>
-		<headerToolbar id="tableContentID">
-			<Toolbar id="lineItemsToolbar">
-				<Title
-					id="lineItemsHeader"
-					text="BOOKS"
-				/>
-				<Button
-					icon="sap-icon://add"
-					press="onAdd"
-				/>
-			</Toolbar>
-		</headerToolbar>
-		<columns>
-			<Column>
-				<Text text="{i18n>book_title}"/>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End"
-			>
-				<Text text="{i18n>book_published_year}"/>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End"
-			>
-				<Text text="{i18n>book_publisher}"/>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End"
-			>
-				<Text text="{i18n>book_review}"/>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="End"
-			>
-				<Text text="Buttons"/>
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem>
-				<cells>
-					<ObjectIdentifier title="{BOOKS>Title}"/>
-					<ObjectAttribute text="{BOOKS>PubYear}"/>
-					<ObjectAttribute text="{BOOKS>Publisher}"/>
-					<ObjectAttribute
-						text="{i18n>book_review_title}"
-						press="reviewPress"
+
+		<Table
+			id="tableID"
+			class="sapUiSmallMarginTop"
+			width="auto"
+			items="{BOOKS>/}"
+			updateFinished=".onListUpdateFinished"
+			noDataText="{i18n>detailLineItemTableNoDataText}"
+			busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+		>
+			<headerToolbar id="tableContentID">
+				<Toolbar id="lineItemsToolbar">
+					<Title
+						id="lineItemsHeader"
+						text="BOOKS"
 					/>
-					<layout:HorizontalLayout>
-						<Button
-							icon="sap-icon://edit"
-							type="Emphasized"
-							enabled="false"
-							class="sapUiTinyMarginBeginEnd"
+					<Button
+						icon="sap-icon://add"
+						press="onAdd"
+					/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column>
+					<Text text="{i18n>book_title}"/>
+				</Column>
+				<Column
+					minScreenWidth="Tablet"
+					demandPopin="true"
+					hAlign="End"
+				>
+					<Text text="{i18n>book_published_year}"/>
+				</Column>
+				<Column
+					minScreenWidth="Tablet"
+					demandPopin="true"
+					hAlign="End"
+				>
+					<Text text="{i18n>book_publisher}"/>
+				</Column>
+				<Column
+					minScreenWidth="Tablet"
+					demandPopin="true"
+					hAlign="End"
+				>
+					<Text text="{i18n>book_review}"/>
+				</Column>
+				<Column
+					minScreenWidth="Tablet"
+					demandPopin="true"
+					hAlign="End"
+				>
+					<Text text="Buttons"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier title="{BOOKS>Title}"/>
+						<ObjectAttribute text="{BOOKS>PubYear}"/>
+						<ObjectAttribute text="{BOOKS>Publisher}"/>
+						<ObjectAttribute
+							text="{i18n>book_review_title}"
+							press="reviewPress"
 						/>
-						<Button
-							icon="sap-icon://delete"
-							type="Emphasized"
-							press="onDelete"
-							class="sapUiTinyMarginBeginEnd"
-						/>
-					</layout:HorizontalLayout>
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
+						<layout:HorizontalLayout>
+							<Button
+								icon="sap-icon://edit"
+								type="Emphasized"
+								enabled="false"
+								class="sapUiTinyMarginBeginEnd"
+							/>
+							<Button
+								icon="sap-icon://delete"
+								type="Emphasized"
+								press="onDelete"
+								class="sapUiTinyMarginBeginEnd"
+							/>
+						</layout:HorizontalLayout>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Page >
 </mvc:View>
