@@ -1,4 +1,4 @@
-<mvc:View 
+<mvc:View
 	xmlns:layout="sap.ui.layout"
 	controllerName="lvcrft.lovecraftcollection.controller.Detail"
 	xmlns="sap.m"
@@ -6,17 +6,14 @@
 	xmlns:mvc="sap.ui.core.mvc"
 >
 	<!-- AUTHOR FORM -->
-	<FlexBox
-		justifyContent="Center"
-		alignItems="Center"
-		direction="Row"
-		width="100%"
+	<HBox
+		class="custom-hbox-header"
+		wrap="Wrap"
+		justifyContent="SpaceBetween"
 	>
-		<FlexBox
-			justifyContent="Center"
-			alignItems="Center"
-			direction="Column"
-			width="50%"
+		<VBox
+			width="500px"
+			class="custom-vbox-header"
 		>
 			<f:SimpleForm
 				id="SimpleFormDisplay354"
@@ -49,22 +46,14 @@
 					<Text text="{Death}"/>
 				</f:content>
 			</f:SimpleForm>
-		</FlexBox>
-		<FlexBox
-			justifyContent="Center"
-			alignItems="Center"
-			direction="Column"
-			width="50%"
-		>
+		</VBox>
+		<VBox class="custom-vbox-header text-center">
 			<Image
 				src="{ImageUrl}"
 				width="200px"
 			/>
-		</FlexBox>
-	</FlexBox>
-
-
-
+		</VBox>
+	</HBox>
 	<!-- BOOKS LIST -->
 	<Table
 		id="tableID"
@@ -84,9 +73,7 @@
 				<Button
 					icon="sap-icon://add"
 					press="onAdd"
-				>
-					
-				</Button>
+				/>
 			</Toolbar>
 		</headerToolbar>
 		<columns>
@@ -132,18 +119,18 @@
 						text="{i18n>book_review_title}"
 						press="reviewPress"
 					/>
-					<layout:HorizontalLayout
-					
-					>
+					<layout:HorizontalLayout>
 						<Button
 							icon="sap-icon://edit"
 							type="Emphasized"
 							enabled="false"
+							class="sapUiTinyMarginBeginEnd"
 						/>
 						<Button
 							icon="sap-icon://delete"
 							type="Emphasized"
 							press="onDelete"
+							class="sapUiTinyMarginBeginEnd"
 						/>
 					</layout:HorizontalLayout>
 				</cells>

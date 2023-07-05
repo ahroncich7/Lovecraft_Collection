@@ -1,9 +1,12 @@
 /* Enter your custom styles here */
-
-.w50 {
-    width: 50%!important;
+.custom-hbox-header{
+    gap: 2em;
 }
 
-.customHidden {
-    display: none!important;
+.custom-vbox-header{
+    flex-grow: 1;
+}
+
+.text-center{
+    text-align: center;
 }
