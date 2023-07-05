@@ -76,7 +76,7 @@
 							tooltip="{i18n>updateAuthorBtn}"
 							icon="sap-icon://edit"
 							type="Transparent"
-							enabled="{AUTHORS>/selected}"
+							enabled="{view>/isSelected}"
 							/>
 						<Button
 							id="deleteButton"
@@ -84,7 +84,7 @@
 							tooltip="{i18n>deleteAuthorBtn}"
 							icon="sap-icon://delete"
 							type="Transparent"
-							enabled="{AUTHORS>/selected}"
+							enabled="{view>/isSelected}"
 							/>
 						
 					</OverflowToolbar>

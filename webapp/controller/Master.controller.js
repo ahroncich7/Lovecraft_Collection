@@ -17,9 +17,8 @@ sap.ui.define([
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
             onInit: function () {
-
-
-
+                this.viewModel = new JSONModel({"isSelected": false})
+                this.getView().setModel(this.viewModel, "view")
             },
 
 
@@ -79,12 +78,12 @@ sap.ui.define([
 
             onSelectionChange: function (oEvent) {
                 this.selectedAuthor = oEvent.getParameter("listItem").getBindingContext("AUTHORS").getObject();
-                this.getView().getModel("AUTHORS").setProperty("/selected", true);
+                this.viewModel.setProperty("/isSelected", true);
             },
 
             deselect: function(){
-                this.getView().getModel("AUTHORS").setProperty("/selected", false);
                 this.selectedAuthor = undefined;
+                this.viewModel.setProperty("/isSelected", false);
             },
 
             onAuthorPress: function (oEvent) {
