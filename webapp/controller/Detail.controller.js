@@ -1,14 +1,14 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-	"sap/ui/core/Fragment"
+    "sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-	JSONModel,
-	Fragment) {
+        JSONModel,
+        Fragment) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Detail", {
@@ -18,6 +18,39 @@ sap.ui.define([
                 oRouter.getRoute("detail").attachMatched(this._onRouteMatched, this);
 
             },
+
+
+            onAdd: function () {
+                this._onOpenDialog();
+            },
+
+
+            onCancel: function () {
+                this.byId("openDialogBooks").close()
+            },
+
+
+            onDelete: function (oEvent) {
+                var bookId = oEvent.getSource().getBindingContext("BOOKS").getObject().Bookid;
+                var authorId = oEvent.getSource().getBindingContext("BOOKS").getObject().Athrid;
+                var oModel = this.getView().getModel();
+                var sPath = "/BOOKSet(" + bookId + ")"
+                oModel.remove(sPath, {
+                    success: function (data, response) {
+
+                    },
+                    error: function (error) {
+                        console.error(error)
+                    }
+                })
+
+                this._setLocalModelBooks(authorId)
+            },
+
+
+
+            // PRIVATE METHODS 
+
 
             _onRouteMatched: function (oEvent) {
 
@@ -74,27 +107,6 @@ sap.ui.define([
                 })
             },
 
-            onDelete: function (oEvent) {
-                var bookId = oEvent.getSource().getBindingContext("BOOKS").getObject().Bookid;
-                var authorId = oEvent.getSource().getBindingContext("BOOKS").getObject().Athrid;
-                var oModel = this.getView().getModel();
-                var sPath = "/BOOKSet(" + bookId + ")"
-                oModel.remove(sPath, {
-                    success: function (data, response) {
-
-                    },
-                    error: function (error) {
-                        console.error(error)
-                    }
-                })
-
-                this._setLocalModelBooks(authorId)
-            },
-
-            onAdd: function(){
-                this._onOpenDialog();
-            },
-
             _onOpenDialog: function () {
                 var oView = this.getView();
                 var that = this;
@@ -111,22 +123,25 @@ sap.ui.define([
                                 oDialog.open();
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
+
                                 })
+                                that.byId("okBtn").attachPress(that._createBook, that);
                             }
                         )
                 }
             },
 
-            createBook: function(oEvent){
+
+            _createBook: function (oEvent) {
                 var authorId = oEvent.getSource().getBindingContext().getObject().Athrid;
                 var oModel = this.getView().getModel();
                 var sPath = "/BOOKSet";
                 var oBook = {
                     "Athrid": authorId,
-                    "Title" : this.byId("titleInput").getValue(),
-                    "PubYear" : this.byId("pubYearInput").getValue(),
-                    "Publisher" : this.byId("pubInput").getValue(),
-                    "Review" : this.byId("reviewInput").getValue(),
+                    "Title": this.byId("titleInput").getValue(),
+                    "PubYear": this.byId("pubYearInput").getValue(),
+                    "Publisher": this.byId("pubInput").getValue(),
+                    "Review": this.byId("reviewInput").getValue(),
                 }
                 oModel.create(sPath, oBook, {
                     success: function (data, response) {
@@ -141,10 +156,6 @@ sap.ui.define([
                 this.byId("openDialogBooks").close();
 
             },
-
-            onCancel: function(){
-                this.byId("openDialogBooks").close()
-            }
 
 
 
