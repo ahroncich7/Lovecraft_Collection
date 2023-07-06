@@ -4,6 +4,7 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "lvcrft/lovecraftcollection/utils/Constants"
 
 ],
     /**
@@ -12,12 +13,15 @@ sap.ui.define([
     function (Controller,
         Fragment,
         JSONModel,
-        Filter, FilterOperator) {
+        Filter, 
+        FilterOperator,
+        Constants) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
             onInit: function () {
                 this.viewModel = new JSONModel({ "isSelected": false })
+                this.viewModel.setProperty("/myths_url",Constants.urls.myths_url)
                 this.getView().setModel(this.viewModel, "view")
             },
 
@@ -90,6 +94,10 @@ sap.ui.define([
                     this._deleteAuthor(this.selectedAuthor.Athrid)
                 }
                 this._deselect();
+            },
+
+            onCancelSelect: function(){
+                this._deselect()
             },
 
             onCancel: function () {

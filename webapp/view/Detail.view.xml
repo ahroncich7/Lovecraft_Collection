@@ -1,9 +1,8 @@
-<mvc:View
+<mvc:View xmlns:launchpad="sap.ushell.ui.launchpad"
 	xmlns:layout="sap.ui.layout"
 	controllerName="lvcrft.lovecraftcollection.controller.Detail"
 	xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
-	xmlns:semantic="sap.f.semantic"
 	xmlns:mvc="sap.ui.core.mvc"
 >
 
@@ -38,14 +37,13 @@
 				singleContainerFullSize="false"
 			>
 				<f:content>
-					<Label text="Nationality"/>
+					<Label text="{i18n>nationalityField}"/>
 					<Text
-						id="nameText"
 						text="{Nationality}"
 					/>
-					<Label text="Birth Date"/>
+					<Label text="{i18n>birth_date}"/>
 					<Text text="{Birth}"/>
-					<Label text="Death Date"/>
+					<Label text="{i18n>death_date}"/>
 					<Text text="{Death}"/>
 				</f:content>
 			</f:SimpleForm>
@@ -66,13 +64,12 @@
 			items="{BOOKS>/}"
 			updateFinished=".onListUpdateFinished"
 			noDataText="{i18n>detailLineItemTableNoDataText}"
-			busyIndicatorDelay="{detailView>/lineItemTableDelay}"
 		>
 			<headerToolbar id="tableContentID">
 				<Toolbar id="lineItemsToolbar">
 					<Title
 						id="lineItemsHeader"
-						text="BOOKS"
+						text="{i18n>books_list_title}"
 					/>
 					<Button
 						icon="sap-icon://add"
@@ -87,30 +84,30 @@
 				<Column
 					minScreenWidth="Tablet"
 					demandPopin="true"
-					hAlign="End"
+					hAlign="Center"
 				>
 					<Text text="{i18n>book_published_year}"/>
 				</Column>
 				<Column
 					minScreenWidth="Tablet"
 					demandPopin="true"
-					hAlign="End"
+					hAlign="Center"
 				>
 					<Text text="{i18n>book_publisher}"/>
 				</Column>
 				<Column
 					minScreenWidth="Tablet"
 					demandPopin="true"
-					hAlign="End"
+					hAlign="Center"
 				>
 					<Text text="{i18n>book_review}"/>
 				</Column>
 				<Column
 					minScreenWidth="Tablet"
 					demandPopin="true"
-					hAlign="End"
+					hAlign="Center"
 				>
-					<Text text="Buttons"/>
+					<Text text="{i18n>actions}"/>
 				</Column>
 			</columns>
 			<items>
@@ -119,10 +116,13 @@
 						<ObjectIdentifier title="{BOOKS>Title}"/>
 						<ObjectAttribute text="{BOOKS>PubYear}"/>
 						<ObjectAttribute text="{BOOKS>Publisher}"/>
-						<ObjectAttribute
-							text="{i18n>book_review_title}"
-							press="reviewPress"
-						/>
+						<Button
+						text="{i18n>review_link}"
+						class="sapUiSmallMarginBottom"
+						press="seeReviewClick"
+						width="150px"
+						type="Neutral"
+						ariaHasPopup="Dialog" />
 
 						<!-- BUTTONS -->
 

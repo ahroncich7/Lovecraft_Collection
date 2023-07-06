@@ -1,18 +1,23 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
         JSONModel,
-        Fragment) {
+        Fragment,
+        MessageBox) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Detail", {
             onInit: function () {
+
+                var i18nModel = this.getOwnerComponent().getModel("i18n");
+                this.oResourceBundle = i18nModel.getResourceBundle();
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
                 oRouter.getRoute("detail").attachMatched(this._onRouteMatched, this);
@@ -45,6 +50,14 @@ sap.ui.define([
                 })
 
                 this._setLocalModelBooks(authorId)
+            },
+
+            seeReviewClick: function (oEvent) {
+                var reviewData = oEvent.getSource().getBindingContext("BOOKS").getProperty("Review");
+                MessageBox.information(reviewData, {
+                    title: this.oResourceBundle.getText("review"),
+                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+                });
             },
 
 
