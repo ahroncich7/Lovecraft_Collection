@@ -129,8 +129,8 @@
 						<layout:HorizontalLayout>
 							<Button
 								icon="sap-icon://edit"
+								press="onUpdate"
 								type="Emphasized"
-								enabled="false"
 								class="sapUiTinyMarginBeginEnd"
 							/>
 							<Button

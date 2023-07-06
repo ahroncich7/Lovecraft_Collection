@@ -2,7 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "lvcrft/lovecraftcollection/utils/Commons"
+
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -10,11 +12,15 @@ sap.ui.define([
     function (Controller,
         JSONModel,
         Fragment,
-        MessageBox) {
+        MessageBox,
+        Commons
+    ) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Detail", {
             onInit: function () {
+
+                // Get i18n
 
                 var i18nModel = this.getOwnerComponent().getModel("i18n");
                 this.oResourceBundle = i18nModel.getResourceBundle();
@@ -26,7 +32,7 @@ sap.ui.define([
 
 
             onAdd: function () {
-                this._onOpenDialog();
+                this._onOpenDialog(false, null);
             },
 
 
@@ -34,22 +40,16 @@ sap.ui.define([
                 this.byId("openDialogBooks").close()
             },
 
+            onUpdate: function (oEvent) {
+                var bookData = oEvent.getSource().getBindingContext("BOOKS").getObject();
+                this._onOpenDialog(true, bookData);
+            },
+
 
             onDelete: function (oEvent) {
-                var bookId = oEvent.getSource().getBindingContext("BOOKS").getObject().Bookid;
                 var authorId = oEvent.getSource().getBindingContext("BOOKS").getObject().Athrid;
-                var oModel = this.getView().getModel();
-                var sPath = "/BOOKSet(" + bookId + ")"
-                oModel.remove(sPath, {
-                    success: function (data, response) {
-
-                    },
-                    error: function (error) {
-                        console.error(error)
-                    }
-                })
-
-                this._setLocalModelBooks(authorId)
+                var bookId = oEvent.getSource().getBindingContext("BOOKS").getObject().Bookid;
+                this._deleteBook(authorId, bookId)
             },
 
             seeReviewClick: function (oEvent) {
@@ -120,7 +120,7 @@ sap.ui.define([
                 })
             },
 
-            _onOpenDialog: function () {
+            _onOpenDialog: function (isUpdate, bookData) {
                 var oView = this.getView();
                 var that = this;
 
@@ -138,8 +138,21 @@ sap.ui.define([
                                     oDialog.destroy();
 
                                 })
-                                that.byId("okBtn").attachPress(that._createBook, that);
                                 that.byId("bookForm").setTitle(that.oResourceBundle.getText("new_book"))
+                                if (isUpdate) {
+
+                                    //Set initial values on update
+                                    that.byId("titleInput").setValue(bookData.Title);
+                                    that.byId("pubYearInput").setValue(bookData.PubYear);
+                                    that.byId("pubInput").setValue(bookData.Publisher);
+                                    that.byId("reviewInput").setValue(bookData.Review);
+                                    that.byId("okBtn").attachPress((oEvent) => {
+                                        that._updateBook(oEvent, bookData.Bookid), that
+                                    });
+
+                                } else {
+                                    that.byId("okBtn").attachPress(that._createBook, that);
+                                }
                             }
                         )
                 }
@@ -150,6 +163,7 @@ sap.ui.define([
                 var authorId = oEvent.getSource().getBindingContext().getObject().Athrid;
                 var oModel = this.getView().getModel();
                 var sPath = "/BOOKSet";
+                var that = this;
                 var oBook = {
                     "Athrid": authorId,
                     "Title": this.byId("titleInput").getValue(),
@@ -159,10 +173,10 @@ sap.ui.define([
                 }
                 oModel.create(sPath, oBook, {
                     success: function (data, response) {
-
+                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
                     },
                     error: function (error) {
-                        console.error(error)
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
                     }
                 })
 
@@ -170,6 +184,51 @@ sap.ui.define([
                 this.byId("openDialogBooks").close();
 
             },
+
+            _updateBook: function (oEvent, bookId) {
+                var authorId = oEvent.getSource().getBindingContext().getObject().Athrid;
+                var bookid = bookId
+                var oModel = this.getView().getModel();
+                var sPath = "/BOOKSet(" + bookid + ")"
+                var that = this;
+
+                var oBook = {
+                    "Athrid": authorId,
+                    "Title": this.byId("titleInput").getValue(),
+                    "PubYear": this.byId("pubYearInput").getValue(),
+                    "Publisher": this.byId("pubInput").getValue(),
+                    "Review": this.byId("reviewInput").getValue(),
+                }
+                oModel.update(sPath, oBook, {
+                    success: function (data, response) {
+                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
+                    },
+                    error: function (error) {
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
+                        console.error(error)
+                    }
+                })
+
+                this._setLocalModelBooks(authorId);
+                this.byId("openDialogBooks").close();
+            },
+
+            _deleteBook: function (authorId, bookId) {
+                var oModel = this.getView().getModel();
+                var sPath = "/BOOKSet(" + bookId + ")";
+                var that = this;
+                oModel.remove(sPath, {
+                    success: function (data, response) {
+                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
+                    },
+                    error: function (error) {
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
+                        console.error(error)
+                    }
+                })
+
+                this._setLocalModelBooks(authorId)
+            }
 
 
 
