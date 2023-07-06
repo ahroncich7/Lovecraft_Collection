@@ -64,6 +64,7 @@
 			items="{BOOKS>/}"
 			updateFinished=".onListUpdateFinished"
 			noDataText="{i18n>detailLineItemTableNoDataText}"
+			sticky="HeaderToolbar"
 		>
 			<headerToolbar id="tableContentID">
 				<Toolbar id="lineItemsToolbar">

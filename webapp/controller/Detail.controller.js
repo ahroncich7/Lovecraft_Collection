@@ -221,10 +221,10 @@ sap.ui.define([
                 var that = this;
                 oModel.remove(sPath, {
                     success: function (data, response) {
-                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
+                        Commons.successAlert(that.oResourceBundle.getText("success_delete"));
                     },
                     error: function (error) {
-                        Commons.errorAlert(that.oResourceBundle.getText("success_delete"))
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
                         console.error(error)
                     }
                 })
