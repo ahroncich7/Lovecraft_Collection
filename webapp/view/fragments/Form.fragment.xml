@@ -4,13 +4,12 @@ xmlns:f="sap.ui.layout.form"
 xmlns:core="sap.ui.core"
 
 >
-    <Dialog id="authorForm" title="Hello">
+    <Dialog id="authorForm">
 		
         <VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="SimpleFormDisplay354"
+		<f:SimpleForm id="AuthorForm"
 			editable="true"
 			layout="ResponsiveGridLayout"
-			title="New Author"
 			labelSpanXL="3"
 			labelSpanL="3"
 			labelSpanM="3"
@@ -26,17 +25,17 @@ xmlns:core="sap.ui.core"
 			singleContainerFullSize="false" >
 			<f:content>
 
-				<Label text="Name" />
+				<Label text="{i18n>name}" />
                 <Input id="nameInput" type="Text"></Input>
-				<Label text="Last Name" />
+				<Label text="{i18n>last_name}" />
                 <Input id="lastNameInput" type="Text"></Input>
-				<Label text="Nationality" />
+				<Label text="{i18n>nationality_field}" />
                 <Input id="nationalityInput" type="Text"></Input>
-				<Label text="Birth Date" />
+				<Label text="{i18n>birth_date}" />
                 <Input id="birthDateInput" type="Date"></Input>
-				<Label text="Death Date" />
+				<Label text="{i18n>death_date}" />
                 <Input id="deathDateInput" type="Date"></Input>
-				<Label text="Image Url" />
+				<Label text="{i18n>image_url}" />
                 <Input id="imageInput" type="Text"></Input>
 
 			</f:content>

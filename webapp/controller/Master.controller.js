@@ -4,22 +4,31 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "lvcrft/lovecraftcollection/utils/Constants"
+    "lvcrft/lovecraftcollection/utils/Constants",
+	"lvcrft/lovecraftcollection/utils/Commons"
 
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     function (Controller,
-        Fragment,
-        JSONModel,
-        Filter, 
-        FilterOperator,
-        Constants) {
+	Fragment,
+	JSONModel,
+	Filter,
+	FilterOperator,
+	Constants,
+	Commons) {
         "use strict";
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
             onInit: function () {
+
+                // Get i18n
+                var i18nModel = this.getOwnerComponent().getModel("i18n");
+                this.oResourceBundle = i18nModel.getResourceBundle();
+
+                
+                // Set VIEW model and bind it into the view
                 this.viewModel = new JSONModel({ "isSelected": false })
                 this.viewModel.setProperty("/myths_url",Constants.urls.myths_url)
                 this.getView().setModel(this.viewModel, "view")
@@ -157,8 +166,10 @@ sap.ui.define([
                                     //Set "Ok" button to update Author
 
                                     that.byId("okBtn").attachPress(that._updateAuthor, that);
+                                    that.byId("AuthorForm").setTitle(that.oResourceBundle.getText("edit_author"))
                                 } else {
                                     that.byId("okBtn").attachPress(that._createAuthor, that);
+                                    that.byId("AuthorForm").setTitle(that.oResourceBundle.getText("new_author"))
                                 }
 
 
@@ -193,12 +204,13 @@ sap.ui.define([
 
                 let sPath = "/AUTHORSet";
                 var OData = this.getView().getModel()
+                var that = this
                 OData.create(sPath, oAuthor, {
                     success: function (response) {
-
+                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
                     },
                     error: function (error) {
-                        console.error(error)
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
                     }
                 });
                 this._closeDialog();
@@ -226,14 +238,14 @@ sap.ui.define([
                 var OData = this.getView().getModel()
 
                 var id = this.selectedAuthor.Athrid
-
+                var that = this
                 var sPath = "/AUTHORSet(" + id + ")";
                 OData.update(sPath, oAuthor, {
                     success: function (data, response) {
-
+                        Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
                     },
                     error: function (error) {
-                        console.error(error);
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
                     }
                 });
                 this._closeDialog();
@@ -248,15 +260,16 @@ sap.ui.define([
 
             _deleteAuthor: function (authorID) {
 
-                var sPath = "/AUTHORSet(" + authorID + ")"
-                var oDataModel = this.getView().getModel()
+                var sPath = "/AUTHORSet(" + authorID + ")";
+                var oDataModel = this.getView().getModel();
+                var that = this;
 
                 oDataModel.remove(sPath, {
                     success: function (data, response) {
-
+                        Commons.successAlert(that.oResourceBundle.getText("success_delete"))
                     },
                     error: function (error) {
-                        console.error(error)
+                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
                     }
                 })
                 this._setLocalModel()

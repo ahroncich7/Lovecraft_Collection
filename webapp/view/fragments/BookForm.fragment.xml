@@ -5,11 +5,10 @@
 >
 	<Dialog
 		id="openDialogBooks"
-		title="Hello"
 	>
 		<VBox class="sapUiSmallMargin">
 			<f:SimpleForm
-				id="form"
+				id="bookForm"
 				editable="true"
 				layout="ResponsiveGridLayout"
 				title="New Author"

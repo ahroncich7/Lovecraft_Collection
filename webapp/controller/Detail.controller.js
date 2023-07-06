@@ -139,6 +139,7 @@ sap.ui.define([
 
                                 })
                                 that.byId("okBtn").attachPress(that._createBook, that);
+                                that.byId("bookForm").setTitle(that.oResourceBundle.getText("new_book"))
                             }
                         )
                 }
