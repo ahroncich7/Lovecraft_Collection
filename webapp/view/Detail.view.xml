@@ -37,7 +37,7 @@
 				singleContainerFullSize="false"
 			>
 				<f:content>
-					<Label text="{i18n>nationalityField}"/>
+					<Label text="{i18n>nationality_field}"/>
 					<Text
 						text="{Nationality}"
 					/>
@@ -130,12 +130,12 @@
 							<Button
 								icon="sap-icon://edit"
 								press="onUpdate"
-								type="Emphasized"
+								type="Neutral"
 								class="sapUiTinyMarginBeginEnd"
 							/>
 							<Button
 								icon="sap-icon://delete"
-								type="Emphasized"
+								type="Reject"
 								press="onDelete"
 								class="sapUiTinyMarginBeginEnd"
 							/>

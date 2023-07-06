@@ -55,8 +55,10 @@ sap.ui.define([
             seeReviewClick: function (oEvent) {
                 var reviewData = oEvent.getSource().getBindingContext("BOOKS").getProperty("Review");
                 MessageBox.information(reviewData, {
+                    id:"review_box",
+                    contentWidth: "100px",
                     title: this.oResourceBundle.getText("review"),
-                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+                    styleClass: "sResponsivePaddingClasses"
                 });
             },
 

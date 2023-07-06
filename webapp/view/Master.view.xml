@@ -8,11 +8,7 @@
 		<semantic:titleHeading>
 			<Title text="{i18n>main_title}"/>
 		</semantic:titleHeading>
-
-
 		<!-- HEADER CONTENT -->
-		
-		
 		<semantic:headerContent>
 			<HBox
 				class="custom-hbox-header"
@@ -26,7 +22,20 @@
 					<ObjectAttribute text="{i18n>title-description}"/>
 				</VBox>
 				<VBox class="custom-vbox-header text-center">
-					<Image src="{view>/myths_url}"/>
+					<Avatar
+						backgroundColor="Accent6"
+						badgeIcon="empty string"
+						badgeTooltip=""
+						customDisplaySize="3rem"
+						customFontSize="1.125rem"
+						displayShape="Square"
+						displaySize="L"
+						fallbackIcon=""
+						imageFitType="Cover"
+						initials=""
+						showBorder="false"
+						src="{view>/myths_url}"
+					/>
 				</VBox>
 			</HBox>
 		</semantic:headerContent>
@@ -34,7 +43,7 @@
 
 		<!-- MAIN CONTENT -->
 
-
+		
 		<semantic:content>
 			<List
 				id="list"
@@ -67,11 +76,7 @@
 								/>
 							</layoutData>
 						</SearchField>
-
-
 						<!-- BUTTONS -->
-
-						
 						<ToolbarSpacer/>
 						<Button
 							id="addButton"
@@ -96,7 +101,6 @@
 							type="Reject"
 							enabled="{view>/isSelected}"
 						/>
-
 						<Button
 							id="cancelSelectionBtn"
 							press="onCancelSelect"
