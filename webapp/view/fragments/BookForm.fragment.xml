@@ -30,6 +30,7 @@
 				<f:content>
 					<Label text="Title"/>
 					<Input
+						required="true"
 						id="titleInput"
 						type="Text"
 					/>
@@ -61,12 +62,14 @@
 		</VBox>
 		<beginButton>
 			<Button
-				id="closeBtn"
+				press="createBook"
+				id="okBtn"
 				text="Ok"
 			/>
 		</beginButton>
 		<endButton>
 			<Button
+				press="onCancel"
 				id="cancelBtn"
 				text="Cancel"
 				type="Reject"

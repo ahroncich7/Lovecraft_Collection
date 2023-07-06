@@ -78,7 +78,7 @@
 						/>
 						<Button
 							id="updateButton"
-							press="onChange"
+							press="onUpdate"
 							tooltip="{i18n>updateAuthorBtn}"
 							icon="sap-icon://edit"
 							type="Neutral"

@@ -123,6 +123,9 @@
 							text="{i18n>book_review_title}"
 							press="reviewPress"
 						/>
+
+						<!-- BUTTONS -->
+
 						<layout:HorizontalLayout>
 							<Button
 								icon="sap-icon://edit"

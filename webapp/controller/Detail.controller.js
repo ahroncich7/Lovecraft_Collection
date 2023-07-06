@@ -112,14 +112,12 @@ sap.ui.define([
                                 oDialog.attachAfterClose(function () {
                                     oDialog.destroy();
                                 })
-
-                                that.byId("closeBtn").attachPress(that._createBook, that);
                             }
                         )
                 }
             },
 
-            _createBook: function(oEvent){
+            createBook: function(oEvent){
                 var authorId = oEvent.getSource().getBindingContext().getObject().Athrid;
                 var oModel = this.getView().getModel();
                 var sPath = "/BOOKSet";
@@ -142,7 +140,12 @@ sap.ui.define([
                 this._setLocalModelBooks(authorId);
                 this.byId("openDialogBooks").close();
 
+            },
+
+            onCancel: function(){
+                this.byId("openDialogBooks").close()
             }
+
 
 
         });

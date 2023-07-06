@@ -4,7 +4,7 @@ xmlns:f="sap.ui.layout.form"
 xmlns:core="sap.ui.core"
 
 >
-    <Dialog id="openDialog" title="Hello">
+    <Dialog id="authorForm" title="Hello">
 		
         <VBox class="sapUiSmallMargin">
 		<f:SimpleForm id="SimpleFormDisplay354"
@@ -44,7 +44,19 @@ xmlns:core="sap.ui.core"
 	</VBox>
 
         <beginButton>
-            <Button id="closeBtn" text="Ok"/>
-        </beginButton>
+			<Button
+				press="createBook"
+				id="okBtn"
+				text="Ok"
+			/>
+		</beginButton>
+		<endButton>
+			<Button
+				press="onCancel"
+				id="cancelBtn"
+				text="Cancel"
+				type="Reject"
+			/>
+		</endButton>
     </Dialog>
 </core:FragmentDefinition>

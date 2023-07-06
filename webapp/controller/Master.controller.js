@@ -17,7 +17,7 @@ sap.ui.define([
 
         return Controller.extend("lvcrft.lovecraftcollection.controller.Master", {
             onInit: function () {
-                this.viewModel = new JSONModel({"isSelected": false})
+                this.viewModel = new JSONModel({ "isSelected": false })
                 this.getView().setModel(this.viewModel, "view")
             },
 
@@ -25,24 +25,6 @@ sap.ui.define([
             onBeforeRendering: function () {
                 this._setLocalModel()
 
-            },
-
-            _setLocalModel: function () {
-                var thatView = this.getView();
-                var oModel = this.getView().getModel();
-                oModel.read("/AUTHORSet", {
-                    success: function (response) {
-                        var newModel = {
-                            "authors": response.results,
-                            "selected":false
-                        }
-                        thatView.setModel(new JSONModel(newModel), "AUTHORS")
-
-                    },
-                    error: function (error) {
-                        console.error(error);
-                    }
-                })
             },
 
             handleSearch: function (evt) {
@@ -81,11 +63,6 @@ sap.ui.define([
                 this.viewModel.setProperty("/isSelected", true);
             },
 
-            deselect: function(){
-                this.selectedAuthor = undefined;
-                this.viewModel.setProperty("/isSelected", false);
-            },
-
             onAuthorPress: function (oEvent) {
 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -102,14 +79,52 @@ sap.ui.define([
             },
 
             onAdd: function (oEvent) {
-                this._onOpenDialog()
+                this._onOpenDialog(false)
+            },
+            onUpdate: function (oEvent) {
+                this._onOpenDialog(true)
             },
 
-            _onOpenDialog: function () {
+            onDelete: function (oEvent) {
+                if (this.selectedAuthor) {
+                    this._deleteAuthor(this.selectedAuthor.Athrid)
+                }
+                this._deselect();
+            },
+
+            onCancel: function () {
+                this._closeDialog();
+            },
+
+
+
+
+            //PRIVATE METHODS
+
+
+            _setLocalModel: function () {
+                var thatView = this.getView();
+                var oModel = this.getView().getModel();
+                oModel.read("/AUTHORSet", {
+                    success: function (response) {
+                        var newModel = {
+                            "authors": response.results,
+                            "selected": false
+                        }
+                        thatView.setModel(new JSONModel(newModel), "AUTHORS")
+
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                })
+            },
+
+            _onOpenDialog: function (isUpdate) {
                 var oView = this.getView();
                 var that = this;
 
-                if (!this.byId("openDialog")) {
+                if (!this.byId("authorForm")) {
                     Fragment.load(
                         {
                             id: oView.getId(),
@@ -119,64 +134,33 @@ sap.ui.define([
                             function (oDialog) {
                                 oView.addDependent(oDialog);
                                 oDialog.open();
-                                oDialog.attachAfterClose(function () {
-                                    oDialog.destroy();
-                                    that.deselect();
-                                    that.byId("list").removeSelections()
-                                })
 
-                                that.byId("closeBtn").attachPress(that._createAuthor, that);
+                                if (isUpdate) {
+
+                                    //Charge data from selected Author
+
+                                    that.byId("nameInput").setValue(that.selectedAuthor.Name);
+                                    that.byId("lastNameInput").setValue(that.selectedAuthor.Lastname);
+                                    that.byId("nationalityInput").setValue(that.selectedAuthor.Nationality);
+                                    that.byId("birthDateInput").setValue(that.selectedAuthor.Birth);
+                                    that.byId("deathDateInput").setValue(that.selectedAuthor.Death);
+                                    that.byId("imageInput").setValue(that.selectedAuthor.ImageUrl);
+
+                                    //Set "Ok" button to update Author
+
+                                    that.byId("okBtn").attachPress(that._updateAuthor, that);
+                                } else {
+                                    that.byId("okBtn").attachPress(that._createAuthor, that);
+                                }
+
+
+                                oDialog.attachAfterClose(function () {
+                                    that._closeDialog()
+                                })
                             }
                         )
                 }
             },
-
-
-
-            _onOpenDialogUpdate: function () {
-                var oView = this.getView();
-                var that = this;
-
-                if (!this.byId("openDialog")) {
-                    Fragment.load(
-                        {
-                            id: oView.getId(),
-                            name: "lvcrft.lovecraftcollection.view.fragments.Form",
-                            controller: this
-                        }).then(
-                            function (oDialog) {
-                                oView.addDependent(oDialog);
-                                oDialog.open();
-                                oDialog.attachAfterClose(function () {
-                                    oDialog.destroy();
-                                    that.deselect();
-                                    that.byId("list").removeSelections()
-                                })
-
-                                // CARGA DATOS EN EL DIALOG
-
-                                // that.byId("idInput").setValue(that.selectedAuthor.Athrid);
-                                that.byId("nameInput").setValue(that.selectedAuthor.Name);
-                                that.byId("lastNameInput").setValue(that.selectedAuthor.Lastname);
-                                that.byId("nationalityInput").setValue(that.selectedAuthor.Nationality);
-                                that.byId("birthDateInput").setValue(that.selectedAuthor.Birth);
-                                that.byId("deathDateInput").setValue(that.selectedAuthor.Death);
-                                that.byId("imageInput").setValue(that.selectedAuthor.ImageUrl);
-
-                                that.byId("closeBtn").attachPress(that._updateAuthor, that);
-                            }
-                        )
-                }
-
-            },
-
-            _closeDialog: function () {
-
-                var dialog = this.byId("openDialog");
-                this.deselect()
-                dialog.destroy();
-            },
-
 
             _createAuthor: function () {
                 // var oIdInput = this.byId("idInput");
@@ -196,7 +180,7 @@ sap.ui.define([
                     "Birth": oBirthDateInput.getValue(),
                     "Death": oDeathDateInput.getValue(),
                     "ImageUrl": imageInput.getValue(),
-                    
+
                 };
 
                 let sPath = "/AUTHORSet";
@@ -213,16 +197,7 @@ sap.ui.define([
                 this._setLocalModel()
             },
 
-            onChange: function () {
-
-                if (this.selectedAuthor) {
-                    this._onOpenDialogUpdate();
-                }
-            },
-
             _updateAuthor: function (oEvent) {
-
-                // var oIdInput = this.byId("idInput");
                 var oNameInput = this.byId("nameInput");
                 var oLastNameInput = this.byId("lastNameInput");
                 var oNationalityInput = this.byId("nationalityInput");
@@ -232,7 +207,6 @@ sap.ui.define([
 
                 var oAuthor = {
 
-                    // "Athrid": Number(oIdInput.getValue()),
                     "Name": oNameInput.getValue(),
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
@@ -254,21 +228,14 @@ sap.ui.define([
                         console.error(error);
                     }
                 });
-
                 this._closeDialog();
                 this._setLocalModel()
-
-
-
             },
 
-
-            onDelete: function (oEvent) {
-                if (this.selectedAuthor) {
-                    this._deleteAuthor(this.selectedAuthor.Athrid)
-                }
-                this.deselect();
-                this.byId("list").removeSelections()
+            _closeDialog: function () {
+                var dialog = this.byId("authorForm");
+                this._deselect()
+                dialog.destroy();
             },
 
             _deleteAuthor: function (authorID) {
@@ -287,6 +254,13 @@ sap.ui.define([
                 this._setLocalModel()
 
 
-            }
+            },
+
+            _deselect: function () {
+                this.selectedAuthor = undefined;
+                this.viewModel.setProperty("/isSelected", false);
+                this.byId("list").removeSelections()
+            },
+
         })
     })
