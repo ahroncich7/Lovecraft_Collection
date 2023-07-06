@@ -222,7 +222,7 @@ sap.ui.define([
                         Commons.successAlert(that.oResourceBundle.getText("changes_saved"));
                     },
                     error: function (error) {
-                        Commons.errorAlert(that.oResourceBundle.getText("error_message"))
+                        Commons.errorAlert(that.oResourceBundle.getText("success_delete"))
                         console.error(error)
                     }
                 })
