@@ -37,7 +37,6 @@ sap.ui.define([
 
             onBeforeRendering: function () {
                 this._setLocalModel()
-
             },
 
             handleSearch: function (evt) {
@@ -71,11 +70,13 @@ sap.ui.define([
                 binding.filter(combinedFilter);
             },
 
+            // Author selection handler
             onSelectionChange: function (oEvent) {
                 this.selectedAuthor = oEvent.getParameter("listItem").getBindingContext("AUTHORS").getObject();
                 this.viewModel.setProperty("/isSelected", true);
             },
 
+            //Set the Author click handler
             onAuthorPress: function (oEvent) {
 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -94,6 +95,7 @@ sap.ui.define([
             onAdd: function (oEvent) {
                 this._onOpenDialog(false)
             },
+
             onUpdate: function (oEvent) {
                 this._onOpenDialog(true)
             },
@@ -115,18 +117,17 @@ sap.ui.define([
 
 
 
-
             //PRIVATE METHODS
 
 
+            // Set a local Json Model to be used in the filters
             _setLocalModel: function () {
                 var thatView = this.getView();
                 var oModel = this.getView().getModel();
                 oModel.read("/AUTHORSet", {
                     success: function (response) {
                         var newModel = {
-                            "authors": response.results,
-                            "selected": false
+                            "authors": response.results
                         }
                         thatView.setModel(new JSONModel(newModel), "AUTHORS")
 
@@ -136,6 +137,8 @@ sap.ui.define([
                     }
                 })
             },
+
+
 
             _onOpenDialog: function (isUpdate) {
                 var oView = this.getView();
@@ -163,11 +166,11 @@ sap.ui.define([
                                     that.byId("deathDateInput").setValue(that.selectedAuthor.Death);
                                     that.byId("imageInput").setValue(that.selectedAuthor.ImageUrl);
 
-                                    //Set "Ok" button to update Author
-
+                                    //Set the author update method to ok button
                                     that.byId("okBtn").attachPress(that._updateAuthor, that);
                                     that.byId("AuthorForm").setTitle(that.oResourceBundle.getText("edit_author"))
                                 } else {
+                                    //Set the author create method to ok button
                                     that.byId("okBtn").attachPress(that._createAuthor, that);
                                     that.byId("AuthorForm").setTitle(that.oResourceBundle.getText("new_author"))
                                 }
@@ -182,7 +185,8 @@ sap.ui.define([
             },
 
             _createAuthor: function () {
-                // var oIdInput = this.byId("idInput");
+
+                // Get the Author Values
                 var oNameInput = this.byId("nameInput");
                 var oLastNameInput = this.byId("lastNameInput");
                 var oNationalityInput = this.byId("nationalityInput");
@@ -191,8 +195,6 @@ sap.ui.define([
                 var imageInput = this.byId("imageInput");
 
                 var oAuthor = {
-
-                    // "Athrid": Number(oIdInput.getValue()),
                     "Name": oNameInput.getValue(),
                     "Lastname": oLastNameInput.getValue(),
                     "Nationality": oNationalityInput.getValue(),
@@ -217,7 +219,10 @@ sap.ui.define([
                 this._setLocalModel()
             },
 
+
             _updateAuthor: function (oEvent) {
+
+                // Get the Author new Values
                 var oNameInput = this.byId("nameInput");
                 var oLastNameInput = this.byId("lastNameInput");
                 var oNationalityInput = this.byId("nationalityInput");

@@ -21,11 +21,11 @@ sap.ui.define([
             onInit: function () {
 
                 // Get i18n
-
                 var i18nModel = this.getOwnerComponent().getModel("i18n");
                 this.oResourceBundle = i18nModel.getResourceBundle();
+                
+                // Set routing 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-
                 oRouter.getRoute("detail").attachMatched(this._onRouteMatched, this);
 
             },
@@ -35,7 +35,6 @@ sap.ui.define([
                 this._onOpenDialog(false, null);
             },
 
-
             onCancel: function () {
                 this.byId("openDialogBooks").close()
             },
@@ -44,7 +43,6 @@ sap.ui.define([
                 var bookData = oEvent.getSource().getBindingContext("BOOKS").getObject();
                 this._onOpenDialog(true, bookData);
             },
-
 
             onDelete: function (oEvent) {
                 var authorId = oEvent.getSource().getBindingContext("BOOKS").getObject().Athrid;
@@ -104,6 +102,8 @@ sap.ui.define([
 
             },
 
+
+            // Set a local JSON Model to show in the list
             _setLocalModelBooks: function (authorId) {
                 var that = this;
                 var sPathBooks = "/AUTHORSet(" + authorId + ")/toBooks";
@@ -148,11 +148,15 @@ sap.ui.define([
                                     that.byId("pubYearInput").setValue(bookData.PubYear);
                                     that.byId("pubInput").setValue(bookData.Publisher);
                                     that.byId("reviewInput").setValue(bookData.Review);
+
+                                    // Set bind update book method to button 
                                     that.byId("okBtn").attachPress((oEvent) => {
                                         that._updateBook(oEvent, bookData.Bookid), that
                                     });
-
+                                    
                                 } else {
+                                    
+                                    // Set bind create book method to button 
                                     that.byId("okBtn").attachPress(that._createBook, that);
                                 }
                             }

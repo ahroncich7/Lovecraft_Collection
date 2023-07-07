@@ -84,7 +84,7 @@
 							press="onAdd"
 							tooltip="{i18n>addAuthorBtn}"
 							icon="sap-icon://add"
-							type="Accept"
+							type="Emphasized"
 							enabled="{= ${view>/isSelected} ? false : true }"
 						/>
 						<Button
